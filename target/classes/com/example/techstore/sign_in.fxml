@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.techstore.controller.SignInController">
+   <AnchorPane prefWidth="1000.0" VBox.vgrow="ALWAYS">
+      <Button fx:id="signInButton" layoutX="300.0" layoutY="540.0" mnemonicParsing="false" onAction="#signIn" prefHeight="40.0" prefWidth="200.0" text="Sign In" />
+      <TextField fx:id="usernameField" alignment="CENTER" layoutX="250.0" layoutY="420.0" prefHeight="40.0" prefWidth="300.0" promptText="Username" />
+      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="251.0" layoutY="480.0" prefHeight="40.0" prefWidth="300.0" promptText="Password" />
+      <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="40.0" prefWidth="200.0" text="Home" />
+   </AnchorPane>
+</VBox>

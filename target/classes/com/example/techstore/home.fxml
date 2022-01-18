@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.techstore.controller.HomeController">
+   <AnchorPane prefWidth="1000.0" VBox.vgrow="ALWAYS">
+      <Button fx:id="signInButton" layoutX="300.0" layoutY="430.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Sign In" />
+      <Button fx:id="exitButton" layoutX="300.0" layoutY="530.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Exit" />
+      <Button fx:id="aboutButton" layoutX="300.0" layoutY="480.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="About" />
+   </AnchorPane>
+</VBox>
