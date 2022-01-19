@@ -6,16 +6,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public abstract class BillingView extends VBox {
+public class BillingView extends VBox {
 
-    protected final AnchorPane anchorPane;
-    protected final TextArea textArea;
-    protected final TextField itemName;
-    protected final TextField itemQuantity;
-    protected final Button addToBill;
-    protected final Button checkOut;
-    protected final Button removeLast;
-    protected final Button home;
+    private final AnchorPane anchorPane;
+    private final TextArea textArea;
+    private final TextField itemName;
+    private final TextField itemQuantity;
+    private final Button addToBill;
+    private final Button checkOut;
+    private final Button removeLast;
+    private final Button home;
 
     public BillingView() {
 
@@ -102,12 +102,19 @@ public abstract class BillingView extends VBox {
 
     }
 
-    protected abstract void addToBill(javafx.event.ActionEvent actionEvent);
+    private void addToBill(javafx.event.ActionEvent actionEvent) {
 
-    protected abstract void checkOut(javafx.event.ActionEvent actionEvent);
+    }
 
-    protected abstract void removeLast(javafx.event.ActionEvent actionEvent);
+    private void checkOut(javafx.event.ActionEvent actionEvent) {
 
-    protected abstract void home(javafx.event.ActionEvent actionEvent);
+    }
 
+    private void removeLast(javafx.event.ActionEvent actionEvent) {
+
+    }
+
+    private void home(javafx.event.ActionEvent actionEvent) {
+
+    }
 }

@@ -7,19 +7,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public abstract class StaffView extends VBox {
+public class StaffView extends VBox {
 
-    protected final AnchorPane anchorPane;
-    protected final Button back;
-    protected final TableView tableView;
-    protected final TableColumn tableColumn;
-    protected final TableColumn tableColumn0;
-    protected final TableColumn tableColumn1;
-    protected final TableColumn tableColumn2;
-    protected final TableColumn tableColumn3;
-    protected final TableColumn tableColumn4;
-    protected final TableColumn tableColumn5;
-    protected final Label label;
+    private final AnchorPane anchorPane;
+    private final Button back;
+    private final TableView tableView;
+    private final TableColumn tableColumn;
+    private final TableColumn tableColumn0;
+    private final TableColumn tableColumn1;
+    private final TableColumn tableColumn2;
+    private final TableColumn tableColumn3;
+    private final TableColumn tableColumn4;
+    private final TableColumn tableColumn5;
+    private final Label label;
 
     public StaffView() {
 
@@ -97,6 +97,7 @@ public abstract class StaffView extends VBox {
 
     }
 
-    protected abstract void admin(javafx.event.ActionEvent actionEvent);
+    private void admin(javafx.event.ActionEvent actionEvent) {
 
+    }
 }
