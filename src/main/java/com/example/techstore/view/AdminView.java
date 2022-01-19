@@ -1,16 +1,16 @@
 package com.example.techstore.view;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class AdminView extends VBox {
-
-    private final AnchorPane anchorPane;
-    private final Button home;
-    private final Button Billing;
-    private final Button store;
-    private final Button Staff;
+    private AnchorPane anchorPane;
+    private Button home;
+    private Button Billing;
+    private Button store;
+    private Button Staff;
 
     public AdminView() {
         anchorPane = new AnchorPane();
@@ -71,19 +71,19 @@ public class AdminView extends VBox {
 
     }
 
-    private void home(javafx.event.ActionEvent actionEvent) {
+    private void home(ActionEvent actionEvent) {
 
     }
 
-    private void billing(javafx.event.ActionEvent actionEvent) {
+    private void billing(ActionEvent actionEvent) {
 
     }
 
-    private void store(javafx.event.ActionEvent actionEvent) {
+    private void store(ActionEvent actionEvent) {
 
     }
 
-    private void staff(javafx.event.ActionEvent actionEvent) {
+    private void staff(ActionEvent actionEvent) {
 
     }
 }

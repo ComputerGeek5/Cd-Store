@@ -1,15 +1,16 @@
 package com.example.techstore.view;
 
+import com.example.techstore.controller.HomeController;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public abstract class HomeView extends VBox {
-
-    protected final AnchorPane anchorPane;
-    protected final Button signIn;
-    protected final Button exitButton;
-    protected final Button aboutButton;
+public class HomeView extends VBox {
+    private AnchorPane anchorPane;
+    private Button signIn;
+    private Button exitButton;
+    private Button aboutButton;
 
     public HomeView() {
 
@@ -29,7 +30,7 @@ public abstract class HomeView extends VBox {
         signIn.setLayoutX(300.0);
         signIn.setLayoutY(430.0);
         signIn.setMnemonicParsing(false);
-        signIn.setOnAction(this::signIn);
+        signIn.setOnAction(HomeController::signIn);
         signIn.setPrefHeight(40.0);
         signIn.setPrefWidth(200.0);
         signIn.getStyleClass().add("button-secondary");
@@ -55,9 +56,5 @@ public abstract class HomeView extends VBox {
         anchorPane.getChildren().add(exitButton);
         anchorPane.getChildren().add(aboutButton);
         getChildren().add(anchorPane);
-
     }
-
-    protected abstract void signIn(javafx.event.ActionEvent actionEvent);
-
 }

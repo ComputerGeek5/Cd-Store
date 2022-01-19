@@ -1,5 +1,6 @@
 package com.example.techstore.view;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -7,22 +8,20 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public abstract class ItemView extends VBox {
-
-    protected final AnchorPane anchorPane;
-    protected final Button back;
-    protected final TableView tableView;
-    protected final TableColumn tableColumn;
-    protected final TableColumn tableColumn0;
-    protected final TableColumn tableColumn1;
-    protected final TableColumn tableColumn2;
-    protected final TableColumn tableColumn3;
-    protected final TableColumn tableColumn4;
-    protected final TableColumn tableColumn5;
-    protected final Label label;
+public class ItemView extends VBox {
+    private AnchorPane anchorPane;
+    private Button back;
+    private TableView tableView;
+    private TableColumn tableColumn;
+    private TableColumn tableColumn0;
+    private TableColumn tableColumn1;
+    private TableColumn tableColumn2;
+    private TableColumn tableColumn3;
+    private TableColumn tableColumn4;
+    private TableColumn tableColumn5;
+    private Label label;
 
     public ItemView() {
-
         anchorPane = new AnchorPane();
         back = new Button();
         tableView = new TableView();
@@ -103,6 +102,7 @@ public abstract class ItemView extends VBox {
 
     }
 
-    protected abstract void store(javafx.event.ActionEvent actionEvent);
+    private void store(ActionEvent actionEvent) {
 
+    }
 }

@@ -1,24 +1,23 @@
 package com.example.techstore.view;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public abstract class BillingView extends VBox {
-
-    protected final AnchorPane anchorPane;
-    protected final TextArea textArea;
-    protected final TextField itemName;
-    protected final TextField itemQuantity;
-    protected final Button addToBill;
-    protected final Button checkOut;
-    protected final Button removeLast;
-    protected final Button home;
+public class BillingView extends VBox {
+    private AnchorPane anchorPane;
+    private TextArea textArea;
+    private TextField itemName;
+    private TextField itemQuantity;
+    private Button addToBill;
+    private Button checkOut;
+    private Button removeLast;
+    private Button home;
 
     public BillingView() {
-
         anchorPane = new AnchorPane();
         textArea = new TextArea();
         itemName = new TextField();
@@ -102,12 +101,19 @@ public abstract class BillingView extends VBox {
 
     }
 
-    protected abstract void addToBill(javafx.event.ActionEvent actionEvent);
+    private void addToBill(ActionEvent actionEvent) {
 
-    protected abstract void checkOut(javafx.event.ActionEvent actionEvent);
+    }
 
-    protected abstract void removeLast(javafx.event.ActionEvent actionEvent);
+    private void checkOut(ActionEvent actionEvent) {
 
-    protected abstract void home(javafx.event.ActionEvent actionEvent);
+    }
 
+    private void removeLast(ActionEvent actionEvent) {
+
+    }
+
+    private void home(ActionEvent actionEvent) {
+
+    }
 }

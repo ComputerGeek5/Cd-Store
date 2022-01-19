@@ -5,15 +5,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class StoreView extends VBox {
-
-    private final AnchorPane anchorPane;
-    private final Button home;
-    private final Button Item;
-    private final Button supplier;
-    private final Button cashier;
+    private AnchorPane anchorPane;
+    private Button home;
+    private Button Item;
+    private Button supplier;
+    private Button cashier;
 
     public StoreView() {
-
         anchorPane = new AnchorPane();
         home = new Button();
         Item = new Button();

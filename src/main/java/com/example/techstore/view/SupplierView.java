@@ -8,19 +8,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class SupplierView extends VBox {
-
-    private final AnchorPane anchorPane;
-    private final Button back;
-    private final TableView tableView;
-    private final TableColumn tableColumn;
-    private final TableColumn tableColumn0;
-    private final TableColumn tableColumn1;
-    private final TableColumn tableColumn2;
-    private final Label label;
-    private final Label label0;
+    private AnchorPane anchorPane;
+    private Button back;
+    private TableView tableView;
+    private TableColumn tableColumn;
+    private TableColumn tableColumn0;
+    private TableColumn tableColumn1;
+    private TableColumn tableColumn2;
+    private Label label;
+    private Label label0;
 
     public SupplierView() {
-
         anchorPane = new AnchorPane();
         back = new Button();
         tableView = new TableView();

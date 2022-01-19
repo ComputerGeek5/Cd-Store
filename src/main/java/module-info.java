@@ -10,6 +10,8 @@ module com.example.techstore {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires javafx.graphics;
+    requires javafx.base;
+    requires org.apache.logging.log4j;
 
     opens com.example.techstore to javafx.fxml;
     exports com.example.techstore;
