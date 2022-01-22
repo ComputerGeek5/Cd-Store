@@ -7,6 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 
 public class Constant {
-    public static String appTitle = "Tech Store";
+    public static String appTitle = "CD-Store";
 
 }

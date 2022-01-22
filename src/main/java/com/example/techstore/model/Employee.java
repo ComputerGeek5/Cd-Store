@@ -2,14 +2,16 @@ package com.example.techstore.model;
 
 import com.example.techstore.model.abst.User;
 import com.example.techstore.util.enumerator.Role;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Date;
 
 public class Employee extends User {
-    Date birthday;
-    String phone;
-    String email;
-    Double salary;
+    protected Date birthday;
+    protected String phone;
+    protected String email;
+    protected Double salary;
 
     public Employee(String name, String username, String password, Role role, Date birthday, String phone, String email, Double salary) {
         super(name, username, password, role);

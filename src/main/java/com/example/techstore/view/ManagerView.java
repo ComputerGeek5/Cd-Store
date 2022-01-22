@@ -1,17 +1,18 @@
 package com.example.techstore.view;
 
+import com.example.techstore.view.abst.View;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class StoreView extends VBox {
+public class ManagerView extends View {
     private AnchorPane anchorPane;
     private Button home;
     private Button Item;
     private Button supplier;
     private Button cashier;
 
-    public StoreView() {
+    public ManagerView() {
         anchorPane = new AnchorPane();
         home = new Button();
         Item = new Button();

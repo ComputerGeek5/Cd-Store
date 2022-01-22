@@ -1,5 +1,6 @@
 package com.example.techstore.view;
 
+import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -7,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class BillingView extends VBox {
+public class BillingView extends View {
     private AnchorPane anchorPane;
     private TextArea textArea;
     private TextField itemName;

@@ -2,13 +2,14 @@ package com.example.techstore.view;
 
 import com.example.techstore.controller.HomeController;
 import com.example.techstore.controller.AuthController;
+import com.example.techstore.view.abst.View;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class SignInView extends VBox {
+public class SignInView extends View {
     private AnchorPane anchorPane;
     private Button signInButton;
     private TextField usernameField;

@@ -1,11 +1,12 @@
 package com.example.techstore.view;
 
+import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class AdminView extends VBox {
+public class AdminView extends View {
     private AnchorPane anchorPane;
     private Button home;
     private Button Billing;

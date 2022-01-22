@@ -1,19 +1,23 @@
 package com.example.techstore.view;
 
+import com.example.techstore.controller.AuthController;
 import com.example.techstore.controller.HomeController;
+import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class HomeView extends VBox {
+import static com.example.techstore.controller.AuthController.isAuthenticated;
+
+public class HomeView extends View {
     private AnchorPane anchorPane;
     private Button signIn;
+    private Button signOut;
     private Button exitButton;
     private Button aboutButton;
 
     public HomeView() {
-
         anchorPane = new AnchorPane();
         signIn = new Button();
         exitButton = new Button();
@@ -36,6 +40,11 @@ public class HomeView extends VBox {
         signIn.getStyleClass().add("button-secondary");
         signIn.setText("Sign In");
 
+        signOut = signIn;
+        signOut.setOnAction(AuthController::signOut);
+        signIn.getStyleClass().add("button-danger");
+        signIn.setText("Sign Out");
+
         exitButton.setLayoutX(300.0);
         exitButton.setLayoutY(530.0);
         exitButton.setMnemonicParsing(false);
@@ -52,7 +61,12 @@ public class HomeView extends VBox {
         aboutButton.getStyleClass().add("button-primary");
         aboutButton.setText("About");
 
-        anchorPane.getChildren().add(signIn);
+        if (isAuthenticated) {
+            anchorPane.getChildren().add(signOut);
+        } else {
+            anchorPane.getChildren().add(signIn);
+        }
+
         anchorPane.getChildren().add(exitButton);
         anchorPane.getChildren().add(aboutButton);
         getChildren().add(anchorPane);

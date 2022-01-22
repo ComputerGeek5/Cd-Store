@@ -1,12 +1,16 @@
 package com.example.techstore.model.abst;
 
 import com.example.techstore.util.enumerator.Role;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public abstract class User {
-    String name;
-    String username;
-    String password;
-    Role role;
+public class User {
+    private static Logger logger = LogManager.getLogger();
+
+    protected String name;
+    protected String username;
+    protected String password;
+    protected Role role;
 
     public User(String name, String username, String password, Role role) {
         this.name = name;
@@ -45,5 +49,19 @@ public abstract class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public Object clone() {
+        Object object = null;
+
+        try {
+            object =  super.clone();
+        } catch (CloneNotSupportedException e) {
+            logger.fatal("Couldn't clone object.");
+            e.printStackTrace();
+        }
+
+        return object;
     }
 }

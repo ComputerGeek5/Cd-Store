@@ -1,5 +1,6 @@
 package com.example.techstore.view;
 
+import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class StaffView extends VBox {
+public class StaffView extends View {
     private AnchorPane anchorPane;
     private Button back;
     private TableView tableView;
