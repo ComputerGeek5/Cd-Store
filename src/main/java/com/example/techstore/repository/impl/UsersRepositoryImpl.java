@@ -1,10 +1,12 @@
-package com.example.techstore.repository;
+package com.example.techstore.repository.impl;
 
 import com.example.techstore.model.abst.User;
+import com.example.techstore.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.util.List;
 
 public class UsersRepositoryImpl implements UserRepository {
     public static ObjectInputStream usersInput;
@@ -40,6 +42,7 @@ public class UsersRepositoryImpl implements UserRepository {
         }
     }
 
+    @Override
     public User findByUsername(String username) {
         User user = tryToFindUserByUsername(username);
         return user;
@@ -55,13 +58,48 @@ public class UsersRepositoryImpl implements UserRepository {
                 }
             }
         } catch (IOException e) {
-            logger.fatal("Couldn't read entity from file.");
+            logger.fatal("Couldn't read user from file.");
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            logger.fatal("Couldn't map to an appropriate entity.");
+            logger.fatal("Couldn't map data to a user.");
             e.printStackTrace();
         }
 
         return user;
+    }
+
+    @Override
+    public User create(User user) {
+        User created = tryToCreateUser(user);
+        return created;
+    }
+
+    private static User tryToCreateUser(User user) {
+        User created = null;
+
+        try {
+            usersOutput.writeObject(user);
+            created = user;
+        } catch (IOException e) {
+            logger.fatal("Couldn't create user.");
+            e.printStackTrace();
+        }
+
+        return created;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return null;
+    }
+
+    @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
+    public void delete(User user) {
+
     }
 }

@@ -41,7 +41,7 @@
 
 .button-secondary:hover {
     -fx-text-fill: #2be4ea;
-    -fx-background-color: #A4DE02;
+    -fx-background-color: #8acc26;
 }
 
 .button-danger:hover {

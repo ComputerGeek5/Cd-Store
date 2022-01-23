@@ -1,5 +1,7 @@
 package com.example.techstore;
 
+import com.example.techstore.view.CashierView;
+import com.example.techstore.view.abst.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,8 +13,8 @@ import static com.example.techstore.util.Constant.appTitle;
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("sign_in.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
+        View view = new CashierView();
+        Scene scene = new Scene(view, 1000, 600);
         stage.setTitle(appTitle);
         stage.setScene(scene);
         stage.show();

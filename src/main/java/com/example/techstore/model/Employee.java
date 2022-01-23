@@ -2,8 +2,6 @@ package com.example.techstore.model;
 
 import com.example.techstore.model.abst.User;
 import com.example.techstore.util.enumerator.Role;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Date;
 
@@ -11,9 +9,9 @@ public class Employee extends User {
     protected Date birthday;
     protected String phone;
     protected String email;
-    protected Double salary;
+    protected double salary;
 
-    public Employee(String name, String username, String password, Role role, Date birthday, String phone, String email, Double salary) {
+    public Employee(String name, String username, String password, Role role, Date birthday, String phone, String email, double salary) {
         super(name, username, password, role);
         this.birthday = birthday;
         this.phone = phone;
@@ -45,11 +43,11 @@ public class Employee extends User {
         this.email = email;
     }
 
-    public Double getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(Double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 }

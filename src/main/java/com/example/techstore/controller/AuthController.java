@@ -1,28 +1,26 @@
 package com.example.techstore.controller;
 
-import com.example.techstore.model.Admin;
-import com.example.techstore.model.Cashier;
-import com.example.techstore.model.Employee;
-import com.example.techstore.model.Manager;
 import com.example.techstore.model.abst.User;
-import com.example.techstore.repository.UserRepository;
-import com.example.techstore.repository.UsersRepositoryImpl;
+import com.example.techstore.service.AuthService;
+import com.example.techstore.service.UserService;
 import com.example.techstore.view.*;
 import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import static com.example.techstore.util.Constant.appTitle;
 
+import static com.example.techstore.util.Constant.appTitle;
 
 public class AuthController {
     public static Boolean isAuthenticated;
-    private static final UserRepository userRepository;
+    private static final UserService userService;
+    private static final AuthService authService;
 
     static {
         isAuthenticated = false;
-        userRepository = new UsersRepositoryImpl();
+        userService = new UserService();
+        authService = new AuthService();
     }
 
     public static void signIn(ActionEvent actionEvent) {
@@ -32,13 +30,13 @@ public class AuthController {
         String username = signIn.getUsernameField().getText();
         String password = signIn.getPasswordField().getText();
 
-        User user = userRepository.findByUsername(username);
+        User user = userService.findByUsername(username);
         if (user != null) {
             User attemptUser = (User) user.clone();
             attemptUser.setPassword(password);
 
-            authenticateUser(attemptUser, user);
-            view = renderViewByRole(user);
+            authService.authenticateUser(attemptUser, user);
+            view = user.getView();
         }
 
         Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
@@ -47,28 +45,6 @@ public class AuthController {
         stage.setTitle(appTitle);
         stage.show();
     }
-
-    private static void authenticateUser(User attemptUser, User actualUser) {
-        String attemptPassword = attemptUser.getPassword();
-        String actualPassword = actualUser.getPassword();
-
-        if (attemptPassword.equals(actualPassword)) {
-            isAuthenticated = true;
-        }
-    }
-
-    public static View renderViewByRole(User user) {
-        View view;
-        if (user instanceof Admin) {
-            view = new AdminView();
-        } else if (user instanceof Manager) {
-            view = new ManagerView();
-        } else {
-            view = new CashierView();
-        }
-        return view;
-    }
-
 
     public static void signOut(ActionEvent actionEvent) {
         Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();

@@ -1,40 +1,45 @@
 package com.example.techstore.model;
 
+import java.util.ArrayDeque;
 import java.util.Date;
-import java.util.List;
+import java.util.Deque;
 
 public class Bill {
-    private List<Item> items;
-    private Double total;
-    private Date date;
+    private Deque<CD> cds;
+    private double total;
+    private Date purchauseDate;
 
-    public Bill(List<Item> items, Double total, Date date) {
-        this.items = items;
+    public Bill() {
+        cds = new ArrayDeque<>();
+    }
+
+    public Bill(Deque<CD> cds, double total, Date purchauseDate) {
+        this.cds = cds;
         this.total = total;
-        this.date = date;
+        this.purchauseDate = purchauseDate;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public Deque<CD> getCds() {
+        return cds;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setCds(Deque<CD> cds) {
+        this.cds = cds;
     }
 
-    public Double getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getPurchauseDate() {
+        return purchauseDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setPurchauseDate(Date purchauseDate) {
+        this.purchauseDate = purchauseDate;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.techstore.model.abst;
 
 import com.example.techstore.util.enumerator.Role;
+import com.example.techstore.view.abst.View;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,6 +12,7 @@ public class User {
     protected String username;
     protected String password;
     protected Role role;
+    protected View view;
 
     public User(String name, String username, String password, Role role) {
         this.name = name;
@@ -49,6 +51,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
     }
 
     @Override

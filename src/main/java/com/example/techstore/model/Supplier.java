@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Supplier {
     String name;
-    List<Item> items;
+    List<CD> CDS;
 
-    public Supplier(String name, List<Item> items) {
+    public Supplier(String name, List<CD> CDS) {
         this.name = name;
-        this.items = items;
+        this.CDS = CDS;
     }
 
     public String getName() {
@@ -19,11 +19,11 @@ public class Supplier {
         this.name = name;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<CD> getItems() {
+        return CDS;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setItems(List<CD> CDS) {
+        this.CDS = CDS;
     }
 }
