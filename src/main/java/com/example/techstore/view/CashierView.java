@@ -40,6 +40,8 @@ public class CashierView extends View {
         billInformation.setLayoutY(50.0);
         billInformation.setPrefHeight(500.0);
         billInformation.setPrefWidth(400.0);
+        billInformation.setEditable(false);
+        billInformation.setDisable(true);
 
         title.setAlignment(javafx.geometry.Pos.CENTER);
         title.setLayoutX(14.0);

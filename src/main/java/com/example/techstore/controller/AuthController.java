@@ -2,7 +2,6 @@ package com.example.techstore.controller;
 
 import com.example.techstore.model.abst.User;
 import com.example.techstore.service.AuthService;
-import com.example.techstore.service.UserService;
 import com.example.techstore.view.*;
 import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
@@ -14,12 +13,10 @@ import static com.example.techstore.util.Constant.appTitle;
 
 public class AuthController {
     public static Boolean isAuthenticated;
-    private static final UserService userService;
     private static final AuthService authService;
 
     static {
         isAuthenticated = false;
-        userService = new UserService();
         authService = new AuthService();
     }
 
@@ -30,7 +27,7 @@ public class AuthController {
         String username = signIn.getUsernameField().getText();
         String password = signIn.getPasswordField().getText();
 
-        User user = userService.findByUsername(username);
+        User user = authService.findByUsername(username);
         if (user != null) {
             User attemptUser = (User) user.clone();
             attemptUser.setPassword(password);
