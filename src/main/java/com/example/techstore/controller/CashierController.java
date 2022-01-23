@@ -4,12 +4,17 @@ import com.example.techstore.model.Bill;
 import com.example.techstore.service.CashierService;
 import com.example.techstore.view.CashierView;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import static com.example.techstore.util.Constant.appTitle;
 
 public class CashierController {
     private static CashierService cashierService;
 
     public static void addToBill(ActionEvent actionEvent) {
-        CashierView view = ((CashierView) actionEvent.getSource());
+        CashierView view = (CashierView) actionEvent.getSource();
 
         boolean cdAdded = cashierService.addCdToBill();
         if (cdAdded) {
@@ -18,17 +23,22 @@ public class CashierController {
     }
 
     public static void checkOut(ActionEvent actionEvent) {
-        CashierView view = ((CashierView) actionEvent.getSource());
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
         Bill created = cashierService.saveBill();
         if (created != null) {
-            view = new CashierView();
+            CashierView view = new CashierView();
             cashierService = new CashierService(new Bill(), view);
+
+            Scene scene = new Scene(view, 1000, 600);
+            stage.setScene(scene);
+            stage.setTitle(appTitle);
+            stage.show();
         }
     }
 
     public static void removeLast(ActionEvent actionEvent) {
-        CashierView view = ((CashierView) actionEvent.getSource());
+        CashierView view = (CashierView) actionEvent.getSource();
 
         boolean cdRemoved = cashierService.removeCdFromBill();
         if (cdRemoved) {

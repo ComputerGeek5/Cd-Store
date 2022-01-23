@@ -1,7 +1,6 @@
 package com.example.techstore.repository.impl;
 
 import com.example.techstore.model.CD;
-import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.CDRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,8 +9,8 @@ import java.io.*;
 import java.util.List;
 
 public class CDRepositoryImpl implements CDRepository {
-    public static ObjectInputStream usersInput;
-    public static ObjectOutputStream usersOutput;
+    public static ObjectInputStream cdsInput;
+    public static ObjectOutputStream cdsOutput;
     private static Logger logger = LogManager.getLogger();
 
     static {
@@ -21,24 +20,24 @@ public class CDRepositoryImpl implements CDRepository {
 
     private static void initializeInput() {
         try {
-            usersInput = new ObjectInputStream(new FileInputStream("./src/main/java/com/example/techstore/data/users.dat"));
+            cdsInput = new ObjectInputStream(new FileInputStream("./src/main/java/com/example/techstore/data/cds.dat"));
         } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find users data.");
+            logger.fatal("Couldn't find cds data.");
             e.printStackTrace();
         } catch (IOException e) {
-            logger.fatal("Couldn't read users data.");
+            logger.fatal("Couldn't read cds data.");
             e.printStackTrace();
         }
     }
 
     private static void initializeOutput() {
         try {
-            usersOutput = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/techstore/data/users.dat"));
+            cdsOutput = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/techstore/data/cds.dat", true));
         } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find users data.");
+            logger.fatal("Couldn't find cds data.");
             e.printStackTrace();
         } catch (IOException e) {
-            logger.fatal("Couldn't read users data.");
+            logger.fatal("Couldn't read cds data.");
             e.printStackTrace();
         }
     }
@@ -53,7 +52,7 @@ public class CDRepositoryImpl implements CDRepository {
         CD cd = null;
 
         try {
-            while ((cd = (CD) usersInput.readObject()) != null) {
+            while ((cd = (CD) cdsInput.readObject()) != null) {
                 if (cd.getTitle().equals(title)) {
                     return cd;
                 }
@@ -79,7 +78,7 @@ public class CDRepositoryImpl implements CDRepository {
         CD created = null;
 
         try {
-            usersOutput.writeObject(cd);
+            cdsOutput.writeObject(cd);
             created = cd;
         } catch (IOException e) {
             logger.fatal("Couldn't create cd.");

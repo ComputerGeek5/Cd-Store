@@ -32,7 +32,7 @@ public class UsersRepositoryImpl implements UserRepository {
 
     private static void initializeOutput() {
         try {
-            usersOutput = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/techstore/data/users.dat"));
+            usersOutput = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/techstore/data/users.dat", true));
         } catch (FileNotFoundException e) {
             logger.fatal("Couldn't find users data.");
             e.printStackTrace();

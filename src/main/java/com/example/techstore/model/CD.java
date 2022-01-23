@@ -1,6 +1,8 @@
 package com.example.techstore.model;
 
-public class CD {
+import java.io.Serializable;
+
+public class CD implements Serializable {
     private String title;
     private String genre;
     private double buyPrice;

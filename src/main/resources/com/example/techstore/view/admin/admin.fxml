@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@../../static/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.techstore.controller.AdminController">
+   <children>
+      <AnchorPane prefWidth="1000.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Button fx:id="home" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="40.0" prefWidth="200.0" styleClass="button-primary" text="Home" />
+            <Button fx:id="Billing" layoutX="275.0" layoutY="383.0" mnemonicParsing="false" onAction="#billing" prefHeight="40.0" prefWidth="200.0" styleClass="button-primary" text="Billing" />
+            <Button fx:id="store" layoutX="275.0" layoutY="458.0" mnemonicParsing="false" onAction="#store" prefHeight="40.0" prefWidth="200.0" styleClass="button-primary" text="Store" />
+            <Button fx:id="Staff" layoutX="275.0" layoutY="533.0" mnemonicParsing="false" onAction="#staff" prefHeight="40.0" prefWidth="200.0" styleClass="button-primary" text="Staff" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
