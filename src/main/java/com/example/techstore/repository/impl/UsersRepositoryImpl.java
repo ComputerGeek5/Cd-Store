@@ -2,37 +2,42 @@ package com.example.techstore.repository.impl;
 
 import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.UserRepository;
+import com.example.techstore.util.io.MyObjectOutputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsersRepositoryImpl implements UserRepository {
-    public static ObjectInputStream usersInput;
+    private static List<User> users;
+    private static final String dataLocation = "./src/main/java/com/example/techstore/data/users.dat";
     public static ObjectOutputStream usersOutput;
     private static Logger logger = LogManager.getLogger();
 
     static {
-        initializeInput();
+        getUsers();
         initializeOutput();
     }
 
-    private static void initializeInput() {
+    private static void getUsers() {
         try {
-            usersInput = new ObjectInputStream(new FileInputStream("./src/main/java/com/example/techstore/data/users.dat"));
+            ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream(dataLocation));
+            users = (List<User>) usersInput.readObject();
         } catch (FileNotFoundException e) {
             logger.fatal("Couldn't find users data.");
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             logger.fatal("Couldn't read users data.");
             e.printStackTrace();
+            users = new ArrayList<>();
         }
     }
 
     private static void initializeOutput() {
         try {
-            usersOutput = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/techstore/data/users.dat", true));
+            usersOutput = new ObjectOutputStream(new FileOutputStream(dataLocation));
         } catch (FileNotFoundException e) {
             logger.fatal("Couldn't find users data.");
             e.printStackTrace();
@@ -49,23 +54,15 @@ public class UsersRepositoryImpl implements UserRepository {
     }
 
     private static User tryToFindUserByUsername(String username) {
-        User user = null;
+        getUsers();
 
-        try {
-            while ((user = (User) usersInput.readObject()) != null) {
-                if (user.getUsername().equals(username)) {
-                    return user;
-                }
+        for (User user: users) {
+            if (user.getUsername().equals(username)) {
+                return user;
             }
-        } catch (IOException e) {
-            logger.fatal("Couldn't read user from file.");
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.fatal("Couldn't map data to a user.");
-            e.printStackTrace();
         }
 
-        return user;
+        return null;
     }
 
     @Override
@@ -78,7 +75,9 @@ public class UsersRepositoryImpl implements UserRepository {
         User created = null;
 
         try {
-            usersOutput.writeObject(user);
+            users.add(created);
+            usersOutput.writeObject(users);
+            usersOutput.flush();
             created = user;
         } catch (IOException e) {
             logger.fatal("Couldn't create user.");

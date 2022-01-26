@@ -11,6 +11,10 @@ public class Employee extends User {
     protected String email;
     protected double salary;
 
+    public Employee() {
+        super();
+    }
+
     public Employee(String name, String username, String password, Role role, Date birthday, String phone, String email, double salary) {
         super(name, username, password, role);
         this.birthday = birthday;

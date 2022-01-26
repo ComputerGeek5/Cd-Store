@@ -23,9 +23,9 @@ public class AuthController {
     public static void signIn(ActionEvent actionEvent) {
         View view = new SignInView();
 
-        SignInView signIn = (SignInView) actionEvent.getSource();
-        String username = signIn.getUsernameField().getText();
-        String password = signIn.getPasswordField().getText();
+        SignInView signInView = (SignInView) ((Node) actionEvent.getSource()).getScene().getRoot();
+        String username = signInView.getUsernameField().getText();
+        String password = signInView.getPasswordField().getText();
 
         User user = authService.findByUsername(username);
         if (user != null) {

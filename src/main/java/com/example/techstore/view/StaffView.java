@@ -1,7 +1,8 @@
 package com.example.techstore.view;
 
+import com.example.techstore.controller.CdController;
+import com.example.techstore.controller.StaffController;
 import com.example.techstore.view.abst.View;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -12,6 +13,7 @@ import javafx.scene.layout.VBox;
 public class StaffView extends View {
     private AnchorPane anchorPane;
     private Button back;
+    private Button add;
     private TableView tableView;
     private TableColumn tableColumn;
     private TableColumn tableColumn0;
@@ -23,9 +25,9 @@ public class StaffView extends View {
     private Label label;
 
     public StaffView() {
-
         anchorPane = new AnchorPane();
         back = new Button();
+        add = new Button();
         tableView = new TableView();
         tableColumn = new TableColumn();
         tableColumn0 = new TableColumn();
@@ -47,11 +49,20 @@ public class StaffView extends View {
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
         back.setMnemonicParsing(false);
-        back.setOnAction(this::admin);
+        back.setOnAction(StaffController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
         back.getStyleClass().add("button-primary");
         back.setText("Back");
+
+        add.setLayoutX(789.0);
+        add.setLayoutY(14.0);
+        add.setMnemonicParsing(false);
+        add.setOnAction(StaffController::add);
+        add.setPrefHeight(40.0);
+        add.setPrefWidth(200.0);
+        add.getStyleClass().add("button-secondary");
+        add.setText("Add");
 
         tableView.setLayoutX(14.0);
         tableView.setLayoutY(168.0);
@@ -94,11 +105,7 @@ public class StaffView extends View {
         tableView.getColumns().add(tableColumn5);
         anchorPane.getChildren().add(tableView);
         anchorPane.getChildren().add(label);
+        anchorPane.getChildren().add(add);
         getChildren().add(anchorPane);
-
-    }
-
-    private void admin(ActionEvent actionEvent) {
-
     }
 }

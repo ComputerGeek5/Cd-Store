@@ -20,7 +20,7 @@ public class ManagerController {
     }
 
     public static void supplier(ActionEvent actionEvent) {
-        Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         SupplierView view = new SupplierView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);

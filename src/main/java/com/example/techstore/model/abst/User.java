@@ -5,7 +5,9 @@ import com.example.techstore.view.abst.View;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Cloneable, Serializable {
     private static Logger logger = LogManager.getLogger();
 
     protected String name;
@@ -13,6 +15,9 @@ public class User {
     protected String password;
     protected Role role;
     protected View view;
+
+    public User() {
+    }
 
     public User(String name, String username, String password, Role role) {
         this.name = name;

@@ -1,10 +1,6 @@
 package com.example.techstore;
 
-import com.example.techstore.view.BillView;
-import com.example.techstore.view.CashierView;
-import com.example.techstore.view.ManagerView;
-import com.example.techstore.view.abst.View;
-import javafx.fxml.FXMLLoader;
+import com.example.techstore.view.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -15,7 +11,8 @@ import static com.example.techstore.util.Constant.appTitle;
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        ManagerView view = new ManagerView();
+        AdminView view = new AdminView();
+//        HomeView view = new HomeView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setTitle(appTitle);
         stage.setScene(scene);

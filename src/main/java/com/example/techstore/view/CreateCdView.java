@@ -1,7 +1,6 @@
 package com.example.techstore.view;
 
 import com.example.techstore.controller.CreateCdController;
-import com.example.techstore.controller.CreateUserController;
 import com.example.techstore.view.abst.View;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

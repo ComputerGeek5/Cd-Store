@@ -35,7 +35,7 @@ public class ManagerView extends View {
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
         back.getStyleClass().add("button-primary");
-        back.setText("Home");
+        back.setText("Back");
 
         cd.setLayoutX(270.0);
         cd.setLayoutY(465.0);

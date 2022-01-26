@@ -1,24 +1,24 @@
 package com.example.techstore.view;
 
+import com.example.techstore.controller.AdminController;
 import com.example.techstore.view.abst.View;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class AdminView extends View {
     private AnchorPane anchorPane;
-    private Button home;
-    private Button Billing;
+    private Button back;
+    private Button billing;
     private Button store;
-    private Button Staff;
+    private Button staff;
 
     public AdminView() {
         anchorPane = new AnchorPane();
-        home = new Button();
-        Billing = new Button();
+        back = new Button();
+        billing = new Button();
         store = new Button();
-        Staff = new Button();
+        staff = new Button();
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -28,63 +28,46 @@ public class AdminView extends View {
         VBox.setVgrow(anchorPane, javafx.scene.layout.Priority.ALWAYS);
         anchorPane.setPrefWidth(1000.0);
 
-        home.setLayoutX(14.0);
-        home.setLayoutY(14.0);
-        home.setMnemonicParsing(false);
-        home.setOnAction(this::home);
-        home.setPrefHeight(40.0);
-        home.setPrefWidth(200.0);
-        home.getStyleClass().add("button-primary");
-        home.setText("Home");
+        back.setLayoutX(14.0);
+        back.setLayoutY(14.0);
+        back.setMnemonicParsing(false);
+        back.setOnAction(AdminController::back);
+        back.setPrefHeight(40.0);
+        back.setPrefWidth(200.0);
+        back.getStyleClass().add("button-primary");
+        back.setText("Back");
 
-        Billing.setLayoutX(275.0);
-        Billing.setLayoutY(383.0);
-        Billing.setMnemonicParsing(false);
-        Billing.setOnAction(this::billing);
-        Billing.setPrefHeight(40.0);
-        Billing.setPrefWidth(200.0);
-        Billing.getStyleClass().add("button-primary");
-        Billing.setText("Billing");
+        billing.setLayoutX(275.0);
+        billing.setLayoutY(383.0);
+        billing.setMnemonicParsing(false);
+        billing.setOnAction(AdminController::billing);
+        billing.setPrefHeight(40.0);
+        billing.setPrefWidth(200.0);
+        billing.getStyleClass().add("button-primary");
+        billing.setText("Billing");
 
         store.setLayoutX(275.0);
         store.setLayoutY(458.0);
         store.setMnemonicParsing(false);
-        store.setOnAction(this::store);
+        store.setOnAction(AdminController::manager);
         store.setPrefHeight(40.0);
         store.setPrefWidth(200.0);
         store.getStyleClass().add("button-primary");
         store.setText("Store");
 
-        Staff.setLayoutX(275.0);
-        Staff.setLayoutY(533.0);
-        Staff.setMnemonicParsing(false);
-        Staff.setOnAction(this::staff);
-        Staff.setPrefHeight(40.0);
-        Staff.setPrefWidth(200.0);
-        Staff.getStyleClass().add("button-primary");
-        Staff.setText("Staff");
+        staff.setLayoutX(275.0);
+        staff.setLayoutY(533.0);
+        staff.setMnemonicParsing(false);
+        staff.setOnAction(AdminController::staff);
+        staff.setPrefHeight(40.0);
+        staff.setPrefWidth(200.0);
+        staff.getStyleClass().add("button-primary");
+        staff.setText("Staff");
 
-        anchorPane.getChildren().add(home);
-        anchorPane.getChildren().add(Billing);
+        anchorPane.getChildren().add(back);
+        anchorPane.getChildren().add(billing);
         anchorPane.getChildren().add(store);
-        anchorPane.getChildren().add(Staff);
+        anchorPane.getChildren().add(staff);
         getChildren().add(anchorPane);
-
-    }
-
-    private void home(ActionEvent actionEvent) {
-
-    }
-
-    private void billing(ActionEvent actionEvent) {
-
-    }
-
-    private void store(ActionEvent actionEvent) {
-
-    }
-
-    private void staff(ActionEvent actionEvent) {
-
     }
 }

@@ -20,6 +20,7 @@ public class HomeView extends View {
     public HomeView() {
         anchorPane = new AnchorPane();
         signIn = new Button();
+        signOut = new Button();
         exitButton = new Button();
         aboutButton = new Button();
 
@@ -40,14 +41,19 @@ public class HomeView extends View {
         signIn.getStyleClass().add("button-secondary");
         signIn.setText("Sign In");
 
-        signOut = signIn;
+        signOut.setLayoutX(300.0);
+        signOut.setLayoutY(430.0);
+        signOut.setMnemonicParsing(false);
         signOut.setOnAction(AuthController::signOut);
-        signIn.getStyleClass().add("button-danger");
-        signIn.setText("Sign Out");
+        signOut.setPrefHeight(40.0);
+        signOut.setPrefWidth(200.0);
+        signOut.getStyleClass().add("button-danger");
+        signOut.setText("Sign Out");
 
         exitButton.setLayoutX(300.0);
         exitButton.setLayoutY(530.0);
         exitButton.setMnemonicParsing(false);
+        exitButton.setOnAction(HomeController::exit);
         exitButton.setPrefHeight(40.0);
         exitButton.setPrefWidth(200.0);
         exitButton.getStyleClass().add("button-danger");
@@ -62,6 +68,7 @@ public class HomeView extends View {
         aboutButton.setText("About");
 
         if (isAuthenticated) {
+            anchorPane.getChildren().remove(signIn);
             anchorPane.getChildren().add(signOut);
         } else {
             anchorPane.getChildren().add(signIn);
