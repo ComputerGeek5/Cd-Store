@@ -11,8 +11,8 @@ import static com.example.techstore.util.Constant.appTitle;
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        AdminView view = new AdminView();
-//        HomeView view = new HomeView();
+//        AdminView view = new AdminView();
+        HomeView view = new HomeView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setTitle(appTitle);
         stage.setScene(scene);

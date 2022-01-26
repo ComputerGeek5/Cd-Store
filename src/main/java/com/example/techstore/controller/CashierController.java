@@ -54,4 +54,8 @@ public class CashierController {
     public static CashierService getCashierService() {
         return cashierService;
     }
+
+    public static void setCashierService(CashierService cashierService) {
+        CashierController.cashierService = cashierService;
+    }
 }

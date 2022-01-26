@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.Serializable;
+
 public class AdminView extends View {
     private AnchorPane anchorPane;
     private Button back;

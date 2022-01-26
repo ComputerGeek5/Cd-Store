@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static com.example.techstore.repository.impl.UsersRepositoryImpl.usersOutput;
 import static com.example.techstore.util.Constant.appTitle;
 
 public class HomeController {

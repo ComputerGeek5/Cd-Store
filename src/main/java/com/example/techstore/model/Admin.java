@@ -11,6 +11,9 @@ public class Admin extends User {
 
     public Admin(String name, String username, String password, Role role) {
         super(name, username, password, role);
-        this.view = new AdminView();
+    }
+
+    public Admin(User user) {
+        this(user.getName(), user.getUsername(), user.getPassword(), user.getRole());
     }
 }

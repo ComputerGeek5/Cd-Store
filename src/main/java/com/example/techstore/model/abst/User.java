@@ -14,7 +14,6 @@ public class User implements Cloneable, Serializable {
     protected String username;
     protected String password;
     protected Role role;
-    protected View view;
 
     public User() {
     }
@@ -56,14 +55,6 @@ public class User implements Cloneable, Serializable {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
     }
 
     @Override

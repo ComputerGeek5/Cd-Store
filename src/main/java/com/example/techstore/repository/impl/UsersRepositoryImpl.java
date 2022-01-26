@@ -1,38 +1,43 @@
 package com.example.techstore.repository.impl;
 
+import com.example.techstore.model.Admin;
+import com.example.techstore.model.Cashier;
+import com.example.techstore.model.Manager;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.UserRepository;
-import com.example.techstore.util.io.MyObjectOutputStream;
+import com.example.techstore.util.enumerator.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.techstore.util.UserUtil.convertUser;
+
 public class UsersRepositoryImpl implements UserRepository {
-    private static List<User> users;
     private static final String dataLocation = "./src/main/java/com/example/techstore/data/users.dat";
-    public static ObjectOutputStream usersOutput;
+    private static ObjectOutputStream usersOutput;
+    private static List<User> users;
+
     private static Logger logger = LogManager.getLogger();
 
-    static {
-        getUsers();
-        initializeOutput();
-    }
-
-    private static void getUsers() {
+    private static List<User> getData() {
         try {
             ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream(dataLocation));
-            users = (List<User>) usersInput.readObject();
+            return (ArrayList<User>) usersInput.readObject();
         } catch (FileNotFoundException e) {
             logger.fatal("Couldn't find users data.");
             e.printStackTrace();
         } catch (IOException | ClassNotFoundException e) {
-            logger.fatal("Couldn't read users data.");
-            e.printStackTrace();
-            users = new ArrayList<>();
+            if (! (e instanceof EOFException)) {
+                logger.fatal("Couldn't read users data.");
+                e.printStackTrace();
+            }
         }
+
+        return new ArrayList<>();
     }
 
     private static void initializeOutput() {
@@ -54,7 +59,7 @@ public class UsersRepositoryImpl implements UserRepository {
     }
 
     private static User tryToFindUserByUsername(String username) {
-        getUsers();
+        users = getData();
 
         for (User user: users) {
             if (user.getUsername().equals(username)) {
@@ -74,8 +79,12 @@ public class UsersRepositoryImpl implements UserRepository {
     private static User tryToCreateUser(User user) {
         User created = null;
 
+        users = getData();
+        initializeOutput();
+
         try {
-            users.add(created);
+            convertUser(user);
+            users.add(user);
             usersOutput.writeObject(users);
             usersOutput.flush();
             created = user;
