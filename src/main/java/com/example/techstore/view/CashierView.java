@@ -3,15 +3,19 @@ package com.example.techstore.view;
 import com.example.techstore.controller.CashierController;
 import com.example.techstore.view.abst.View;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import static com.example.techstore.util.CashierViewUtil.fillComboBoxCdsOptions;
+import static com.example.techstore.util.enumerator.CreateStaffViewUtil.fillComboBoxRolesOptions;
+
 public class CashierView extends View {
     private AnchorPane anchorPane;
     private TextArea billInformation;
-    private TextField title;
+    private ComboBox cd;
     private TextField quantity;
     private Button addToBill;
     private Button checkOut;
@@ -21,12 +25,14 @@ public class CashierView extends View {
     public CashierView() {
         anchorPane = new AnchorPane();
         billInformation = new TextArea();
-        title = new TextField();
+        cd = new ComboBox();
         quantity = new TextField();
         addToBill = new Button();
         checkOut = new Button();
         removeLast = new Button();
         back = new Button();
+
+        fillComboBoxCdsOptions(cd);
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -40,15 +46,15 @@ public class CashierView extends View {
         billInformation.setLayoutY(50.0);
         billInformation.setPrefHeight(500.0);
         billInformation.setPrefWidth(400.0);
-        billInformation.setEditable(false);
+        billInformation.setEditable(true);
         billInformation.setDisable(true);
+        billInformation.setStyle("-fx-opacity: 1.0;");
 
-        title.setAlignment(javafx.geometry.Pos.CENTER);
-        title.setLayoutX(14.0);
-        title.setLayoutY(197.0);
-        title.setPrefHeight(50.0);
-        title.setPrefWidth(250.0);
-        title.setPromptText("Title");
+        cd.setLayoutX(14.0);
+        cd.setLayoutY(197.0);
+        cd.setPrefHeight(50.0);
+        cd.setPrefWidth(250.0);
+        cd.setPromptText("CD");
 
         quantity.setAlignment(javafx.geometry.Pos.CENTER);
         quantity.setLayoutX(14.0);
@@ -94,7 +100,7 @@ public class CashierView extends View {
         back.setText("Back");
 
         anchorPane.getChildren().add(billInformation);
-        anchorPane.getChildren().add(title);
+        anchorPane.getChildren().add(cd);
         anchorPane.getChildren().add(quantity);
         anchorPane.getChildren().add(addToBill);
         anchorPane.getChildren().add(checkOut);
@@ -103,12 +109,12 @@ public class CashierView extends View {
         getChildren().add(anchorPane);
     }
 
-    public TextField getTitle() {
-        return title;
+    public ComboBox getCd() {
+        return cd;
     }
 
-    public void setTitle(TextField title) {
-        this.title = title;
+    public void setCd(ComboBox cd) {
+        this.cd = cd;
     }
 
     public TextField getQuantity() {

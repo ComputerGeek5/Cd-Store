@@ -1,8 +1,10 @@
 package com.example.techstore.controller;
 
+import com.example.techstore.model.Bill;
 import com.example.techstore.model.Cashier;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.service.AuthService;
+import com.example.techstore.service.CashierService;
 import com.example.techstore.util.enumerator.Role;
 import com.example.techstore.view.*;
 import com.example.techstore.view.abst.View;
@@ -37,21 +39,16 @@ public class AuthController {
             authService.authenticateUser(attemptUser, user);
 
             if (isAuthenticated) {
-                if (user.getRole() == Role.ADMIN) {
-                    view = new AdminView();
-                } else if (user.getRole()  == Role.MANAGER) {
-                    view = new ManagerView();
-                } else {
-                    view = new CashierView();
-                }
+                HomeController.setUser(user);
+                HomeController.self(actionEvent);
+            } else {
+                Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(view, 1000, 600);
+                stage.setScene(scene);
+                stage.setTitle(appTitle);
+                stage.show();
             }
         }
-
-        Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(view, 1000, 600);
-        stage.setScene(scene);
-        stage.setTitle(appTitle);
-        stage.show();
     }
 
     public static void signOut(ActionEvent actionEvent) {

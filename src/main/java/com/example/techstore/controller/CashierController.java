@@ -1,8 +1,11 @@
 package com.example.techstore.controller;
 
 import com.example.techstore.model.Bill;
+import com.example.techstore.model.Cashier;
+import com.example.techstore.model.abst.User;
 import com.example.techstore.service.CashierService;
 import com.example.techstore.view.CashierView;
+import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -14,8 +17,6 @@ public class CashierController {
     private static CashierService cashierService;
 
     public static void addToBill(ActionEvent actionEvent) {
-        CashierView view = (CashierView) actionEvent.getSource();
-
         boolean cdAdded = cashierService.addCdToBill();
         if (cdAdded) {
             cashierService.addCdToBillInformation();
@@ -38,8 +39,6 @@ public class CashierController {
     }
 
     public static void removeLast(ActionEvent actionEvent) {
-        CashierView view = (CashierView) actionEvent.getSource();
-
         boolean cdRemoved = cashierService.removeCdFromBill();
         if (cdRemoved) {
             cashierService.removeCdFromBillInformation();
@@ -49,7 +48,6 @@ public class CashierController {
     public static void back(ActionEvent actionEvent) {
         HomeController.home(actionEvent);
     }
-
 
     public static CashierService getCashierService() {
         return cashierService;

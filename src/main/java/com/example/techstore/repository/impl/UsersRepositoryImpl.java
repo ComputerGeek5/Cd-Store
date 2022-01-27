@@ -14,31 +14,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.techstore.util.UserUtil.convertUser;
-
 public class UsersRepositoryImpl implements UserRepository {
     private static final String dataLocation = "./src/main/java/com/example/techstore/data/users.dat";
     private static ObjectOutputStream usersOutput;
     private static List<User> users;
 
     private static Logger logger = LogManager.getLogger();
-
-    private static List<User> getData() {
-        try {
-            ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream(dataLocation));
-            return (ArrayList<User>) usersInput.readObject();
-        } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find users data.");
-            e.printStackTrace();
-        } catch (IOException | ClassNotFoundException e) {
-            if (! (e instanceof EOFException)) {
-                logger.fatal("Couldn't read users data.");
-                e.printStackTrace();
-            }
-        }
-
-        return new ArrayList<>();
-    }
 
     private static void initializeOutput() {
         try {
@@ -58,8 +39,8 @@ public class UsersRepositoryImpl implements UserRepository {
         return user;
     }
 
-    private static User tryToFindUserByUsername(String username) {
-        users = getData();
+    private User tryToFindUserByUsername(String username) {
+        users = getAll();
 
         for (User user: users) {
             if (user.getUsername().equals(username)) {
@@ -70,41 +51,64 @@ public class UsersRepositoryImpl implements UserRepository {
         return null;
     }
 
+
     @Override
     public User create(User user) {
         User created = tryToCreateUser(user);
         return created;
     }
 
-    private static User tryToCreateUser(User user) {
-        User created = null;
-
-        users = getData();
+    private User tryToCreateUser(User user) {
+        users = getAll();
         initializeOutput();
 
         try {
-            convertUser(user);
-            users.add(user);
+            addUser(user);
             usersOutput.writeObject(users);
             usersOutput.flush();
-            created = user;
+            return user;
         } catch (IOException e) {
             logger.fatal("Couldn't create user.");
             e.printStackTrace();
         }
 
-        return created;
+        return null;
+    }
+
+    public static void addUser(User user) {
+        if (user.getRole() == Role.ADMIN) {
+            users.add(new Admin(user));
+        } else if (user.getRole() == Role.MANAGER) {
+            users.add(new Manager(user));
+        } else {
+            users.add(new Cashier(user));
+        }
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        try {
+            ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream(dataLocation));
+            return (ArrayList<User>) usersInput.readObject();
+        } catch (FileNotFoundException e) {
+            logger.fatal("Couldn't find users data.");
+            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            if (! (e instanceof EOFException)) {
+                logger.fatal("Couldn't read users data.");
+                e.printStackTrace();
+            }
+        }
+
+        return new ArrayList<>();
     }
+
 
     @Override
     public User update(User user) {
         return null;
     }
+
 
     @Override
     public void delete(User user) {

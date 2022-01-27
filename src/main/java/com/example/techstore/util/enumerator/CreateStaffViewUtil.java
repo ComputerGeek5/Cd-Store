@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CreateStaffViewUtil {
-    public static void fillComboBoxOptions(ComboBox roles) {
+    public static void fillComboBoxRolesOptions(ComboBox roles) {
         roles.getItems().addAll(Arrays.asList(Role.values()));
     }
 }

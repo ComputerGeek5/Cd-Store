@@ -6,33 +6,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CDRepositoryImpl implements CDRepository {
-    public static ObjectInputStream cdsInput;
-    public static ObjectOutputStream cdsOutput;
+    private static final String dataLocation = "./src/main/java/com/example/techstore/data/cds.dat";
+    private static ObjectOutputStream cdsOutput;
+    private static List<CD> cds;
+
     private static Logger logger = LogManager.getLogger();
-
-    static {
-        initializeInput();
-        initializeOutput();
-    }
-
-    private static void initializeInput() {
-        try {
-            cdsInput = new ObjectInputStream(new FileInputStream("./src/main/java/com/example/techstore/data/cds.dat"));
-        } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find cds data.");
-            e.printStackTrace();
-        } catch (IOException e) {
-            logger.fatal("Couldn't read cds data.");
-            e.printStackTrace();
-        }
-    }
 
     private static void initializeOutput() {
         try {
-            cdsOutput = new ObjectOutputStream(new FileOutputStream("./src/main/java/com/example/techstore/data/cds.dat", true));
+            cdsOutput = new ObjectOutputStream(new FileOutputStream(dataLocation));
         } catch (FileNotFoundException e) {
             logger.fatal("Couldn't find cds data.");
             e.printStackTrace();
@@ -48,25 +34,18 @@ public class CDRepositoryImpl implements CDRepository {
         return cd;
     }
 
-    private static CD tryToFindCdByTitle(String title) {
-        CD cd = null;
+    private CD tryToFindCdByTitle(String title) {
+        cds = getAll();
 
-        try {
-            while ((cd = (CD) cdsInput.readObject()) != null) {
-                if (cd.getTitle().equals(title)) {
-                    return cd;
-                }
+        for(CD cd: cds) {
+            if (cd.getTitle().equals(title)) {
+                return cd;
             }
-        } catch (IOException e) {
-            logger.fatal("Couldn't read CD from file.");
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.fatal("Couldn't map data to a CD.");
-            e.printStackTrace();
         }
 
-        return cd;
+        return null;
     }
+
 
     @Override
     public CD create(CD cd) {
@@ -74,29 +53,48 @@ public class CDRepositoryImpl implements CDRepository {
         return created;
     }
 
-    private static CD tryToCreateCd(CD cd) {
-        CD created = null;
+    private CD tryToCreateCd(CD cd) {
+        cds = getAll();
+        initializeOutput();
 
         try {
-            cdsOutput.writeObject(cd);
-            created = cd;
+            cds.add(cd);
+            cdsOutput.writeObject(cds);
+            cdsOutput.flush();
+            return cd;
         } catch (IOException e) {
             logger.fatal("Couldn't create cd.");
             e.printStackTrace();
         }
 
-        return created;
+        return null;
     }
+
 
     @Override
     public List<CD> getAll() {
-        return null;
+        try {
+            ObjectInputStream cdsInput = new ObjectInputStream(new FileInputStream(dataLocation));
+            return (ArrayList<CD>) cdsInput.readObject();
+        } catch (FileNotFoundException e) {
+            logger.fatal("Couldn't find cds data.");
+            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            if (! (e instanceof EOFException)) {
+                logger.fatal("Couldn't read cds data.");
+                e.printStackTrace();
+            }
+        }
+
+        return new ArrayList<>();
     }
+
 
     @Override
     public CD update(CD cd) {
         return null;
     }
+
 
     @Override
     public void delete(CD cd) {

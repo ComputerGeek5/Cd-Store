@@ -1,7 +1,10 @@
 package com.example.techstore.service;
 
+import com.example.techstore.controller.CashierController;
+import com.example.techstore.controller.HomeController;
 import com.example.techstore.model.Bill;
 import com.example.techstore.model.CD;
+import com.example.techstore.model.Cashier;
 import com.example.techstore.repository.BillRepository;
 import com.example.techstore.repository.CDRepository;
 import com.example.techstore.repository.impl.BillRepositoryImpl;
@@ -26,12 +29,15 @@ public class CashierService {
     }
 
     public Bill saveBill() {
+        Cashier cashier = (Cashier) HomeController.getUser();
+        int billsSold = cashier.getBillsSold();
+        cashier.setBillsSold(++billsSold);
         return billRepository.create(bill);
     }
 
 
     public boolean addCdToBill() {
-        String title = view.getTitle().getText();
+        String title = (String) view.getCd().getValue();
         int quantity = Integer.parseInt(view.getQuantity().getText());
 
         CD cd = cdRepository.findByTitle(title);
@@ -48,7 +54,7 @@ public class CashierService {
     public void addCdToBillInformation() {
         TextArea billInformationNode = view.getBillInformation();
         String billInformation = billInformationNode.getText();
-        String title = view.getTitle().getText();
+        String title = (String) view.getCd().getValue();
         int quantity = Integer.parseInt(view.getQuantity().getText());
 
         CD cd = bill.getCds().getLast();
@@ -56,9 +62,9 @@ public class CashierService {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(billInformation).append("\n");
-        stringBuilder.append("CD Title:    ").append(title)
-        .append("    Quantity:    ").append(quantity)
-        .append("    Price:    ").append(price);
+        stringBuilder.append("CD Title:    ").append(title).append("\n")
+        .append("Quantity:    ").append(quantity).append("\n")
+        .append("Price:    ").append(price);
 
         billInformation = stringBuilder.toString();
 
@@ -83,7 +89,10 @@ public class CashierService {
     public void removeCdFromBillInformation() {
         TextArea billInformationNode = view.getBillInformation();
         String billInformation = billInformationNode.getText();
-        billInformation = billInformation.substring(0, billInformation.lastIndexOf("\n"));
+
+        for (int i = 0; i < 3; i++) {
+            billInformation = billInformation.substring(0, billInformation.lastIndexOf("\n"));
+        }
 
         billInformationNode.setText(billInformation);
     }

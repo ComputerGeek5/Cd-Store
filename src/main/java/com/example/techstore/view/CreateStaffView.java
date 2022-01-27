@@ -9,10 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.techstore.util.enumerator.CreateStaffViewUtil.fillComboBoxOptions;
+import static com.example.techstore.util.enumerator.CreateStaffViewUtil.fillComboBoxRolesOptions;
 
 public class CreateStaffView extends View {
     private AnchorPane anchorPane;
@@ -32,7 +29,8 @@ public class CreateStaffView extends View {
         create = new Button();
         roles = new ComboBox();
 
-        fillComboBoxOptions(roles);
+        // TODO
+        fillComboBoxRolesOptions(roles);
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);

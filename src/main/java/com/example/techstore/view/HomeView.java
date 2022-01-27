@@ -12,6 +12,7 @@ import static com.example.techstore.controller.AuthController.isAuthenticated;
 
 public class HomeView extends View {
     private AnchorPane anchorPane;
+    private Button home;
     private Button signIn;
     private Button signOut;
     private Button exitButton;
@@ -19,6 +20,7 @@ public class HomeView extends View {
 
     public HomeView() {
         anchorPane = new AnchorPane();
+        home = new Button();
         signIn = new Button();
         signOut = new Button();
         exitButton = new Button();
@@ -59,6 +61,15 @@ public class HomeView extends View {
         exitButton.getStyleClass().add("button-danger");
         exitButton.setText("Exit");
 
+        home.setLayoutX(300.0);
+        home.setLayoutY(380);
+        home.setMnemonicParsing(false);
+        home.setOnAction(HomeController::self);
+        home.setPrefHeight(40.0);
+        home.setPrefWidth(200.0);
+        home.getStyleClass().add("button-primary");
+        home.setText("Home");
+
         aboutButton.setLayoutX(300.0);
         aboutButton.setLayoutY(480.0);
         aboutButton.setMnemonicParsing(false);
@@ -71,11 +82,17 @@ public class HomeView extends View {
             anchorPane.getChildren().remove(signIn);
             anchorPane.getChildren().add(signOut);
         } else {
+            anchorPane.getChildren().remove(signOut);
             anchorPane.getChildren().add(signIn);
         }
 
         anchorPane.getChildren().add(exitButton);
         anchorPane.getChildren().add(aboutButton);
+
+        if (isAuthenticated) {
+            anchorPane.getChildren().add(home);
+        }
+
         getChildren().add(anchorPane);
     }
 }

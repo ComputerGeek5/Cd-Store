@@ -1,10 +1,11 @@
 package com.example.techstore.model;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Deque;
 
-public class Bill {
+public class Bill implements Serializable  {
     private Deque<CD> cds;
     private double total;
     private Date purchauseDate;
