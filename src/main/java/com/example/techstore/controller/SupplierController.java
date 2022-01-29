@@ -15,7 +15,6 @@ public class SupplierController {
         ManagerView view = new ManagerView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -24,7 +23,6 @@ public class SupplierController {
         CreateSupplierView view = new CreateSupplierView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 }

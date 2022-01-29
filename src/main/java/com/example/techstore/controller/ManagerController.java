@@ -15,7 +15,6 @@ public class ManagerController {
         CdView view = new CdView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -24,7 +23,6 @@ public class ManagerController {
         SupplierView view = new SupplierView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -33,7 +31,6 @@ public class ManagerController {
         BillView view = new BillView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 

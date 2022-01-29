@@ -64,7 +64,7 @@ public class User implements Cloneable, Serializable {
         try {
             object =  super.clone();
         } catch (CloneNotSupportedException e) {
-            logger.fatal("Couldn't clone object.");
+            logger.fatal("Failed to clone object.");
             e.printStackTrace();
         }
 

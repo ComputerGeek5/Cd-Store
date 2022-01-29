@@ -15,7 +15,6 @@ public class AdminController {
         HomeView view = new HomeView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -24,7 +23,6 @@ public class AdminController {
         BillView view = new BillView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -33,7 +31,6 @@ public class AdminController {
         ManagerView view = new ManagerView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -42,7 +39,6 @@ public class AdminController {
         StaffView view = new StaffView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 }

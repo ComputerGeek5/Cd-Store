@@ -17,7 +17,6 @@ import java.util.List;
 public class UsersRepositoryImpl implements UserRepository {
     private static final String dataLocation = "./src/main/java/com/example/techstore/data/users.dat";
     private static ObjectOutputStream usersOutput;
-    private static List<User> users;
 
     private static Logger logger = LogManager.getLogger();
 
@@ -25,10 +24,10 @@ public class UsersRepositoryImpl implements UserRepository {
         try {
             usersOutput = new ObjectOutputStream(new FileOutputStream(dataLocation));
         } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find users data.");
+            logger.fatal("Failed to find users data.");
             e.printStackTrace();
         } catch (IOException e) {
-            logger.fatal("Couldn't read users data.");
+            logger.fatal("Failed to read users data.");
             e.printStackTrace();
         }
     }
@@ -40,7 +39,7 @@ public class UsersRepositoryImpl implements UserRepository {
     }
 
     private User tryToFindUserByUsername(String username) {
-        users = getAll();
+        List<User> users = getAll();
 
         for (User user: users) {
             if (user.getUsername().equals(username)) {
@@ -59,23 +58,23 @@ public class UsersRepositoryImpl implements UserRepository {
     }
 
     private User tryToCreateUser(User user) {
-        users = getAll();
+        List<User> users = getAll();
         initializeOutput();
 
         try {
-            addUser(user);
+            addUser(user, users);
             usersOutput.writeObject(users);
             usersOutput.flush();
             return user;
         } catch (IOException e) {
-            logger.fatal("Couldn't create user.");
+            logger.fatal("Failed to create user.");
             e.printStackTrace();
         }
 
         return null;
     }
 
-    public static void addUser(User user) {
+    private void addUser(User user, List<User> users) {
         if (user.getRole() == Role.ADMIN) {
             users.add(new Admin(user));
         } else if (user.getRole() == Role.MANAGER) {
@@ -91,11 +90,11 @@ public class UsersRepositoryImpl implements UserRepository {
             ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream(dataLocation));
             return (ArrayList<User>) usersInput.readObject();
         } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find users data.");
+            logger.fatal("Failed to find users data.");
             e.printStackTrace();
         } catch (IOException | ClassNotFoundException e) {
             if (! (e instanceof EOFException)) {
-                logger.fatal("Couldn't read users data.");
+                logger.fatal("Failed to read users data.");
                 e.printStackTrace();
             }
         }

@@ -33,7 +33,6 @@ public class CashierController {
 
             Scene scene = new Scene(view, 1000, 600);
             stage.setScene(scene);
-            stage.setTitle(appTitle);
             stage.show();
         }
     }

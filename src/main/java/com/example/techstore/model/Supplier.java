@@ -1,14 +1,19 @@
 package com.example.techstore.model;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class Supplier {
-    String name;
-    List<CD> CDS;
+public class Supplier implements Serializable {
+    private String name;
+    private CD cd;
+    private int cdQuantity;
 
-    public Supplier(String name, List<CD> CDS) {
+    public Supplier() {
+    }
+
+    public Supplier(String name, CD cd, int cdQuantity) {
         this.name = name;
-        this.CDS = CDS;
+        this.cd = cd;
+        this.cdQuantity = cdQuantity;
     }
 
     public String getName() {
@@ -19,11 +24,19 @@ public class Supplier {
         this.name = name;
     }
 
-    public List<CD> getItems() {
-        return CDS;
+    public CD getCd() {
+        return cd;
     }
 
-    public void setItems(List<CD> CDS) {
-        this.CDS = CDS;
+    public void setCd(CD cd) {
+        this.cd = cd;
+    }
+
+    public int getCdQuantity() {
+        return cdQuantity;
+    }
+
+    public void setCdQuantity(int cdQuantity) {
+        this.cdQuantity = cdQuantity;
     }
 }

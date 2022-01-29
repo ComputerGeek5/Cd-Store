@@ -16,7 +16,6 @@ public class StaffController {
         CdView view = new CdView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -25,7 +24,6 @@ public class StaffController {
         CreateStaffView view = new CreateStaffView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 }

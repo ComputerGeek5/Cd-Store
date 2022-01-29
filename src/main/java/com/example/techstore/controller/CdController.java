@@ -15,7 +15,6 @@ public class CdController {
         ManagerView view = new ManagerView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -24,7 +23,6 @@ public class CdController {
         CreateCdView view = new CreateCdView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 }

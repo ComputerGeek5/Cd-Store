@@ -45,7 +45,6 @@ public class AuthController {
                 Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
                 Scene scene = new Scene(view, 1000, 600);
                 stage.setScene(scene);
-                stage.setTitle(appTitle);
                 stage.show();
             }
         }
@@ -57,7 +56,6 @@ public class AuthController {
         HomeView homeView = new HomeView();
         Scene scene = new Scene(homeView, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 }

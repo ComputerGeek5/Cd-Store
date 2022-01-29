@@ -12,7 +12,6 @@ import java.util.List;
 public class BillRepositoryImpl implements BillRepository {
     private static final String dataLocation = "./src/main/java/com/example/techstore/data/bills.dat";
     private static ObjectOutputStream billsOutput;
-    private static List<Bill> bills;
 
     private static Logger logger = LogManager.getLogger();
 
@@ -20,10 +19,10 @@ public class BillRepositoryImpl implements BillRepository {
         try {
             billsOutput = new ObjectOutputStream(new FileOutputStream(dataLocation));
         } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find bills data.");
+            logger.fatal("Failed to find bills data.");
             e.printStackTrace();
         } catch (IOException e) {
-            logger.fatal("Couldn't read bills data.");
+            logger.fatal("Failed to read bills data.");
             e.printStackTrace();
         }
     }
@@ -36,7 +35,7 @@ public class BillRepositoryImpl implements BillRepository {
     }
 
     private Bill tryToCreateBill(Bill bill) {
-        bills = getAll();
+        List<Bill> bills = getAll();
         initializeOutput();
 
         try {
@@ -45,7 +44,7 @@ public class BillRepositoryImpl implements BillRepository {
             billsOutput.flush();
             return bill;
         } catch (IOException e) {
-            logger.fatal("Couldn't create bill.");
+            logger.fatal("Failed to create bill.");
             e.printStackTrace();
         }
 
@@ -59,11 +58,11 @@ public class BillRepositoryImpl implements BillRepository {
             ObjectInputStream billsInput = new ObjectInputStream(new FileInputStream(dataLocation));
             return (ArrayList<Bill>) billsInput.readObject();
         } catch (FileNotFoundException e) {
-            logger.fatal("Couldn't find bills data.");
+            logger.fatal("Failed to find bills data.");
             e.printStackTrace();
         } catch (IOException | ClassNotFoundException e) {
             if (! (e instanceof EOFException)) {
-                logger.fatal("Couldn't read bills data.");
+                logger.fatal("Failed to read bills data.");
                 e.printStackTrace();
             }
         }

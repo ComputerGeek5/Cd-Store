@@ -7,19 +7,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import static com.example.techstore.util.CashierViewUtil.fillComboBoxCdsOptions;
+import static com.example.techstore.util.enumerator.CreateStaffViewUtil.fillComboBoxRolesOptions;
+
 public class CreateSupplierView extends VBox {
-    private final AnchorPane anchorPane;
-    private final Button back;
-    private final TextField name;
-    private final Button create;
-    private final ComboBox cd;
+    private AnchorPane anchorPane;
+    private Button back;
+    private TextField name;
+    private Button create;
+    private ComboBox cds;
+    private TextField quantity;
 
     public CreateSupplierView() {
         anchorPane = new AnchorPane();
         back = new Button();
         name = new TextField();
         create = new Button();
-        cd = new ComboBox();
+        cds = new ComboBox();
+        quantity = new TextField();
+
+        fillComboBoxCdsOptions(cds);
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -45,7 +52,7 @@ public class CreateSupplierView extends VBox {
         name.setPromptText("Name");
 
         create.setLayoutX(400.0);
-        create.setLayoutY(300.0);
+        create.setLayoutY(370.0);
         create.setMnemonicParsing(false);
         create.setOnAction(CreateSupplierController::create);
         create.setPrefHeight(40.0);
@@ -53,15 +60,70 @@ public class CreateSupplierView extends VBox {
         create.getStyleClass().add("button-secondary");
         create.setText("Create");
 
-        cd.setLayoutX(350.0);
-        cd.setLayoutY(200.0);
-        cd.setPrefWidth(300.0);
-        cd.setPromptText("CD");
+        cds.setLayoutX(350.0);
+        cds.setLayoutY(200.0);
+        cds.setPrefWidth(300.0);
+        cds.setPromptText("CD");
+
+        quantity.setAlignment(javafx.geometry.Pos.CENTER);
+        quantity.setLayoutX(351.0);
+        quantity.setLayoutY(285.0);
+        quantity.setPrefWidth(300.0);
+        quantity.setPromptText("Quantity");
 
         anchorPane.getChildren().add(back);
         anchorPane.getChildren().add(name);
         anchorPane.getChildren().add(create);
-        anchorPane.getChildren().add(cd);
+        anchorPane.getChildren().add(cds);
+        anchorPane.getChildren().add(quantity);
         getChildren().add(anchorPane);
+    }
+
+    public AnchorPane getAnchorPane() {
+        return anchorPane;
+    }
+
+    public void setAnchorPane(AnchorPane anchorPane) {
+        this.anchorPane = anchorPane;
+    }
+
+    public Button getBack() {
+        return back;
+    }
+
+    public void setBack(Button back) {
+        this.back = back;
+    }
+
+    public TextField getName() {
+        return name;
+    }
+
+    public void setName(TextField name) {
+        this.name = name;
+    }
+
+    public Button getCreate() {
+        return create;
+    }
+
+    public void setCreate(Button create) {
+        this.create = create;
+    }
+
+    public ComboBox getCds() {
+        return cds;
+    }
+
+    public void setCds(ComboBox cds) {
+        this.cds = cds;
+    }
+
+    public TextField getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(TextField quantity) {
+        this.quantity = quantity;
     }
 }

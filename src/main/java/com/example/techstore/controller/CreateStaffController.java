@@ -23,7 +23,6 @@ public class CreateStaffController {
         SupplierView view = new SupplierView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
-        stage.setTitle(appTitle);
         stage.show();
     }
 
@@ -36,7 +35,6 @@ public class CreateStaffController {
             view = new CreateStaffView();
             Scene scene = new Scene(view, 1000, 600);
             stage.setScene(scene);
-            stage.setTitle(appTitle);
             stage.show();
         }
     }
