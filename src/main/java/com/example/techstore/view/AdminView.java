@@ -11,14 +11,12 @@ import java.io.Serializable;
 public class AdminView extends View {
     private AnchorPane anchorPane;
     private Button back;
-    private Button billing;
     private Button store;
     private Button staff;
 
     public AdminView() {
         anchorPane = new AnchorPane();
         back = new Button();
-        billing = new Button();
         store = new Button();
         staff = new Button();
 
@@ -39,15 +37,6 @@ public class AdminView extends View {
         back.getStyleClass().add("button-primary");
         back.setText("Back");
 
-        billing.setLayoutX(275.0);
-        billing.setLayoutY(383.0);
-        billing.setMnemonicParsing(false);
-        billing.setOnAction(AdminController::billing);
-        billing.setPrefHeight(40.0);
-        billing.setPrefWidth(200.0);
-        billing.getStyleClass().add("button-primary");
-        billing.setText("Billing");
-
         store.setLayoutX(275.0);
         store.setLayoutY(458.0);
         store.setMnemonicParsing(false);
@@ -67,7 +56,6 @@ public class AdminView extends View {
         staff.setText("Staff");
 
         anchorPane.getChildren().add(back);
-        anchorPane.getChildren().add(billing);
         anchorPane.getChildren().add(store);
         anchorPane.getChildren().add(staff);
         getChildren().add(anchorPane);

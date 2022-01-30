@@ -17,4 +17,5 @@ module com.example.techstore {
     exports com.example.techstore;
     exports com.example.techstore.controller;
     opens com.example.techstore.controller to javafx.fxml;
+    opens com.example.techstore.model to javafx.base;
 }

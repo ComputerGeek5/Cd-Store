@@ -3,6 +3,7 @@ package com.example.techstore.controller;
 import com.example.techstore.service.CreateStaffService;
 import com.example.techstore.view.CreateCdView;
 import com.example.techstore.view.CreateStaffView;
+import com.example.techstore.view.StaffView;
 import com.example.techstore.view.SupplierView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -20,7 +21,7 @@ public class CreateStaffController {
 
     public static void back(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        SupplierView view = new SupplierView();
+        StaffView view = new StaffView();
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
         stage.show();
