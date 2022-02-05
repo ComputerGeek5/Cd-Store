@@ -116,7 +116,6 @@ public class SupplierRepositoryImpl implements SupplierRepository {
                 suppliers.set(index, supplier);
                 suppliersOutput.writeObject(suppliers);
                 suppliersOutput.flush();
-                suppliersOutput.close();
                 return supplier;
             }
         } catch (IOException e) {
@@ -143,7 +142,6 @@ public class SupplierRepositoryImpl implements SupplierRepository {
                 Supplier supplier = suppliers.remove((int) index);
                 suppliersOutput.writeObject(suppliers);
                 suppliersOutput.flush();
-                suppliersOutput.close();
                 return supplier;
             }
         } catch (IOException e) {

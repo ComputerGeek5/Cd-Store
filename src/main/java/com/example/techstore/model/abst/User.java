@@ -32,6 +32,33 @@ public class User implements Cloneable, Serializable {
         this.role = role;
     }
 
+    @Override
+    public Object clone() {
+        Object object = null;
+
+        try {
+            object =  super.clone();
+        } catch (CloneNotSupportedException e) {
+            logger.fatal("Failed to clone object.");
+            e.printStackTrace();
+        }
+
+        return object;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        User user = (User) o;
+        return username.equals(user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
+    }
+
     public String getName() {
         return name;
     }
@@ -70,27 +97,5 @@ public class User implements Cloneable, Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    @Override
-    public Object clone() {
-        Object object = null;
-
-        try {
-            object =  super.clone();
-        } catch (CloneNotSupportedException e) {
-            logger.fatal("Failed to clone object.");
-            e.printStackTrace();
-        }
-
-        return object;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id);
     }
 }

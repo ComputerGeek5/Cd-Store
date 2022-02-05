@@ -64,7 +64,7 @@ public class BillService {
                             return true;
                         }
 
-                        if ((bill.getPurchauseDate().equals(fromDate) || bill.getPurchauseDate().isAfter(fromDate)) && (bill.getPurchauseDate().equals(toDate) || bill.getPurchauseDate().isBefore(toDate))) {
+                        if ((bill.getIssueDate().equals(fromDate) || bill.getIssueDate().isAfter(fromDate)) && (bill.getIssueDate().equals(toDate) || bill.getIssueDate().isBefore(toDate))) {
                             return true;
                         }
 

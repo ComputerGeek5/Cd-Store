@@ -1,22 +1,25 @@
 package com.example.techstore.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class Supplier implements Serializable {
     private String id;
     private String name;
-    private CD cd;
+    private Cd cd;
     private int cdQuantity;
+    private LocalDate registerDate;
 
     {
         id = UUID.randomUUID().toString();
+        this.registerDate = LocalDate.now();
     }
 
     public Supplier() {
     }
 
-    public Supplier(String name, CD cd, int cdQuantity) {
+    public Supplier(String name, Cd cd, int cdQuantity) {
         this.name = name;
         this.cd = cd;
         this.cdQuantity = cdQuantity;
@@ -30,11 +33,11 @@ public class Supplier implements Serializable {
         this.name = name;
     }
 
-    public CD getCd() {
+    public Cd getCd() {
         return cd;
     }
 
-    public void setCd(CD cd) {
+    public void setCd(Cd cd) {
         this.cd = cd;
     }
 
@@ -52,5 +55,13 @@ public class Supplier implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public LocalDate getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
     }
 }

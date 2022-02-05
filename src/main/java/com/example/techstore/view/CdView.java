@@ -1,7 +1,7 @@
 package com.example.techstore.view;
 
 import com.example.techstore.controller.CdController;
-import com.example.techstore.model.CD;
+import com.example.techstore.model.Cd;
 import com.example.techstore.service.CdService;
 import com.example.techstore.view.abst.View;
 import javafx.collections.FXCollections;
@@ -13,16 +13,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CdView extends View {
     private static final CdService cdService;
     private static final int rowsPerPage;
-    private static List<CD> cds;
+    private static List<Cd> cds;
 
     static {
         cdService = new CdService();
-        rowsPerPage = 8;
+        rowsPerPage = 5;
     }
 
     private AnchorPane anchorPane;
@@ -33,7 +34,8 @@ public class CdView extends View {
     private Pagination pagination;
 
     public CdView() {
-        cds = cdService.findAll();
+        cds = new ArrayList<>();
+        cds.addAll(cdService.findAll());
 
         anchorPane = new AnchorPane();
         back = new Button();
@@ -136,12 +138,12 @@ public class CdView extends View {
     }
 
     private void addButtonColumn() {
-        TableColumn<CD, Void> tableColumn5 = new TableColumn("Action");
+        TableColumn<Cd, Void> tableColumn5 = new TableColumn("Action");
         tableColumn5.setMinWidth(0.0);
         tableColumn5.setPrefWidth(93.0);
 
-        Callback<TableColumn<CD, Void>, TableCell<CD, Void>> cellFactory = param -> {
-            final TableCell<CD, Void> cell = new TableCell<>() {
+        Callback<TableColumn<Cd, Void>, TableCell<Cd, Void>> cellFactory = param -> {
+            final TableCell<Cd, Void> cell = new TableCell<>() {
                 private final Button button = new Button("Edit");
 
                 {
@@ -153,7 +155,7 @@ public class CdView extends View {
 //                    icon.setSize("1.5em");
 //                    button.setGraphic(icon);
                     button.setOnAction((ActionEvent actionEvent) -> {
-                        CD cd = getTableView().getItems().get(getIndex());
+                        Cd cd = getTableView().getItems().get(getIndex());
                         CdController.edit(actionEvent, cd.getId());
                     });
                 }

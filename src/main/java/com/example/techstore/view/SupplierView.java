@@ -2,7 +2,7 @@ package com.example.techstore.view;
 
 import com.example.techstore.controller.EditSupplierController;
 import com.example.techstore.controller.SupplierController;
-import com.example.techstore.model.CD;
+import com.example.techstore.model.Cd;
 import com.example.techstore.model.Supplier;
 import com.example.techstore.service.SupplierService;
 import com.example.techstore.view.abst.View;
@@ -25,7 +25,7 @@ public class SupplierView extends View {
 
     static {
         supplierService = new SupplierService();
-        rowsPerPage = 8;
+        rowsPerPage = 5;
     }
 
     private AnchorPane anchorPane;
@@ -85,7 +85,7 @@ public class SupplierView extends View {
         tableColumn0.setMinWidth(0.0);
         tableColumn0.setPrefWidth(300.0);
         tableColumn0.setCellValueFactory( data -> {
-            CD cd = data.getValue().getCd();
+            Cd cd = data.getValue().getCd();
             String title = cd.getTitle();
             return new ReadOnlyStringWrapper(title);
         });

@@ -60,7 +60,7 @@
 
 .font-secondary {
     -fx-text-fill: #4C9A2A;
-    -fx-underline: true;
+    -fx-font-weight: bold;
 }
 
 .font-danger {

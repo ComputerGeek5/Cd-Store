@@ -83,10 +83,12 @@ public class UsersRepositoryImpl implements UserRepository {
         initializeOutput();
 
         try {
-            users.add(user);
-            usersOutput.writeObject(users);
-            usersOutput.flush();
-            return user;
+            boolean unique = users.add(user);
+            if (unique) {
+                usersOutput.writeObject(users);
+                usersOutput.flush();
+                return user;
+            }
         } catch (IOException e) {
             logger.fatal("Failed to create user.");
             e.printStackTrace();
@@ -128,11 +130,13 @@ public class UsersRepositoryImpl implements UserRepository {
     private static User tryToUpdateUser(User before, User after, Set<User> users) {
         try {
             users.remove(before);
-            users.add(after);
-            usersOutput.writeObject(users);
-            usersOutput.flush();
-            usersOutput.close();
-            return after;
+            boolean updated = users.add(after);
+
+            if (updated) {
+                usersOutput.writeObject(users);
+                usersOutput.flush();
+                return after;
+            }
         } catch (IOException e) {
             logger.fatal("Failed to update cd.");
             e.printStackTrace();
@@ -156,7 +160,6 @@ public class UsersRepositoryImpl implements UserRepository {
             users.remove(user);
             usersOutput.writeObject(users);
             usersOutput.flush();
-            usersOutput.close();
             return user;
         } catch (IOException e) {
             logger.fatal("Failed to delete supplier.");

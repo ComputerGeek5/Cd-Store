@@ -1,16 +1,10 @@
 package com.example.techstore.view;
 
-import com.example.techstore.controller.CdController;
 import com.example.techstore.controller.CreateCdController;
-import com.example.techstore.model.CD;
 import com.example.techstore.view.abst.View;
-import javafx.collections.FXCollections;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 
 public class CreateCdView extends View {
     private AnchorPane anchorPane;

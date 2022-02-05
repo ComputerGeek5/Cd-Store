@@ -14,7 +14,7 @@ public class SupplierService {
     }
 
     public List<Supplier> getAll() {
-        return supplierRepository.findAll();
+        return (List<Supplier>) supplierRepository.findAll();
     }
 
     public Supplier delete(Supplier supplier) {

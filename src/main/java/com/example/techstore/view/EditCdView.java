@@ -1,18 +1,12 @@
 package com.example.techstore.view;
 
-import com.example.techstore.controller.CdController;
-import com.example.techstore.controller.CreateCdController;
 import com.example.techstore.controller.EditCdController;
-import com.example.techstore.model.CD;
+import com.example.techstore.model.Cd;
 import com.example.techstore.service.CdService;
 import com.example.techstore.view.abst.View;
-import javafx.collections.FXCollections;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 
 public class EditCdView extends View {
     private static final CdService cdService;
@@ -30,7 +24,7 @@ public class EditCdView extends View {
     private Button update;
     private Button delete;
     private final String id;
-    private final CD cd;
+    private final Cd cd;
 
     public EditCdView(String id) {
         this.id = id;

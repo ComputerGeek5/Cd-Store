@@ -12,6 +12,7 @@ public class AdminView extends View {
     private Button store;
     private Button staff;
     private Button billing;
+    private Button statistics;
 
     public AdminView() {
         anchorPane = new AnchorPane();
@@ -19,6 +20,7 @@ public class AdminView extends View {
         store = new Button();
         staff = new Button();
         billing = new Button();
+        statistics = new Button();
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -37,6 +39,15 @@ public class AdminView extends View {
         back.getStyleClass().add("button-primary");
         back.setText("Back");
 
+        statistics.setLayoutY(383.0);
+        statistics.setLayoutX(275.0);
+        statistics.setLayoutY(383.0);
+        statistics.setOnAction(AdminController::statistics);
+        statistics.setPrefHeight(40.0);
+        statistics.setPrefWidth(200.0);
+        statistics.getStyleClass().add("button-primary");
+        statistics.setText("Statistics");
+
         billing.setLayoutX(275.0);
         billing.setLayoutY(383.0);
         billing.setOnAction(AdminController::cashier);
@@ -44,7 +55,7 @@ public class AdminView extends View {
         billing.setPrefWidth(200.0);
         billing.getStyleClass().add("button-primary");
         billing.setText("Billing");
-        
+
         store.setLayoutX(275.0);
         store.setLayoutY(458.0);
         store.setOnAction(AdminController::manager);

@@ -1,9 +1,8 @@
 package com.example.techstore.service;
 
-import com.example.techstore.Application;
 import com.example.techstore.controller.HomeController;
 import com.example.techstore.model.Bill;
-import com.example.techstore.model.CD;
+import com.example.techstore.model.Cd;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.BillRepository;
 import com.example.techstore.repository.CDRepository;
@@ -45,7 +44,7 @@ public class CashierService {
         bill.setIssuer(issuer);
         bill.setBillInformation(view.getBillInformation().getText());
 
-        for (CD cd: bill.getCds()) {
+        for (Cd cd: bill.getCds()) {
             cdRepository.update(cd);
         }
         return billRepository.create(bill);
@@ -88,7 +87,7 @@ public class CashierService {
         String title = (String) view.getCd().getValue();
         int quantity = Integer.parseInt(view.getQuantity().getText());
 
-        CD cd = cdRepository.findByTitle(title);
+        Cd cd = cdRepository.findByTitle(title);
         int soldQuantity = cd.getSoldQuantity();
 
         boolean validCdBalance = cashierValidator.validateCdBalance(cd, quantity);
@@ -114,7 +113,7 @@ public class CashierService {
         String title = (String) view.getCd().getValue();
         int quantity = Integer.parseInt(view.getQuantity().getText());
 
-        CD cd = bill.getCds().getLast();
+        Cd cd = bill.getCds().getLast();
         double price = cd.getSellPrice() * quantity;
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -132,7 +131,7 @@ public class CashierService {
     public boolean removeCdFromBill() {
         int quantity = Integer.parseInt(view.getQuantity().getText());
 
-        CD cd = cdRepository.findByTitle(bill.getCds().getLast().getTitle());
+        Cd cd = cdRepository.findByTitle(bill.getCds().getLast().getTitle());
         int soldQuantity = cd.getSoldQuantity();
         cd.setSoldQuantity(soldQuantity - quantity);
 

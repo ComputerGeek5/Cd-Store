@@ -1,10 +1,7 @@
 package com.example.techstore.view;
 
-import com.example.techstore.controller.CdController;
 import com.example.techstore.controller.StaffController;
-import com.example.techstore.model.CD;
 import com.example.techstore.model.Employee;
-import com.example.techstore.model.abst.User;
 import com.example.techstore.service.StaffService;
 import com.example.techstore.view.abst.View;
 import javafx.collections.FXCollections;
@@ -25,7 +22,7 @@ public class StaffView extends View {
 
     static {
         staffService = new StaffService();
-        rowsPerPage = 8;
+        rowsPerPage = 5;
     }
 
     private AnchorPane anchorPane;

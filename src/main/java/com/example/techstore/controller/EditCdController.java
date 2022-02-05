@@ -1,19 +1,13 @@
 package com.example.techstore.controller;
 
-import com.example.techstore.model.CD;
-import com.example.techstore.model.Employee;
+import com.example.techstore.model.Cd;
 import com.example.techstore.service.CdService;
-import com.example.techstore.util.enumerator.Role;
 import com.example.techstore.view.CdView;
 import com.example.techstore.view.EditCdView;
-import com.example.techstore.view.EditStaffView;
-import com.example.techstore.view.ManagerView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.time.LocalDate;
 
 public class EditCdController {
     private static final CdService cdService;
@@ -32,28 +26,20 @@ public class EditCdController {
 
     public static void update(ActionEvent actionEvent, String id) {
         EditCdView view = (EditCdView) ((Node) actionEvent.getSource()).getScene().getRoot();
-        String title = view.getTitle().getText();
-        String genre = view.getGenre().getText();
-        double buyPrice = Double.parseDouble(view.getBuyPrice().getText());
-        double sellPrice = Double.parseDouble(view.getSellPrice().getText());
+        boolean updated = cdService.update(view, id);
 
-        CD newCd = new CD(title, genre, buyPrice, sellPrice);
-        newCd.setId(id);
-
-        CD updated = cdService.update(newCd);
-
-        if (updated != null) {
+        if (updated) {
             back(actionEvent);
         }
     }
 
     public static void delete(ActionEvent actionEvent, String id) {
-        CD cd = new CD();
+        Cd cd = new Cd();
         cd.setId(id);
 
-        CD deleted = cdService.delete(cd);
+        boolean deleted = cdService.delete(cd);
 
-        if (deleted != null) {
+        if (deleted) {
             back(actionEvent);
         }
     }

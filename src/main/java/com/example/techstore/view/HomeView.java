@@ -42,7 +42,7 @@ public class HomeView extends View {
         signIn.setText("Sign In");
 
         signOut.setLayoutX(300.0);
-        signOut.setLayoutY(430.0);
+        signOut.setLayoutY(380.0);
         signOut.setOnAction(AuthController::signOut);
         signOut.setPrefHeight(40.0);
         signOut.setPrefWidth(200.0);
@@ -58,7 +58,7 @@ public class HomeView extends View {
         exitButton.setText("Exit");
 
         home.setLayoutX(300.0);
-        home.setLayoutY(380);
+        home.setLayoutY(430.0);
         home.setOnAction(HomeController::self);
         home.setPrefHeight(40.0);
         home.setPrefWidth(200.0);

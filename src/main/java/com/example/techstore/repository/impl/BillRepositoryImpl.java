@@ -115,7 +115,6 @@ public class BillRepositoryImpl implements BillRepository {
                 bills.set(index, bill);
                 billsOutput.writeObject(bills);
                 billsOutput.flush();
-                billsOutput.close();
                 return bill;
             }
         } catch (IOException e) {
@@ -142,7 +141,6 @@ public class BillRepositoryImpl implements BillRepository {
                 Bill bill = bills.remove((int) index);
                 billsOutput.writeObject(bills);
                 billsOutput.flush();
-                billsOutput.close();
                 return bill;
             }
         } catch (IOException e) {

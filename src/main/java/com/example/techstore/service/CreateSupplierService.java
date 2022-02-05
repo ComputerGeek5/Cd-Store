@@ -1,6 +1,6 @@
 package com.example.techstore.service;
 
-import com.example.techstore.model.CD;
+import com.example.techstore.model.Cd;
 import com.example.techstore.model.Supplier;
 import com.example.techstore.repository.CDRepository;
 import com.example.techstore.repository.SupplierRepository;
@@ -19,7 +19,7 @@ public class CreateSupplierService {
 
     public Supplier create(CreateSupplierView view) {
         String chosenCd = (String) view.getCds().getValue();
-        CD cd = cdRepository.findByTitle(chosenCd);
+        Cd cd = cdRepository.findByTitle(chosenCd);
         String name = view.getName().getText();
         int quantity = Integer.parseInt(view.getQuantity().getText());
         Supplier supplier = new Supplier(name, cd, quantity);
@@ -28,12 +28,12 @@ public class CreateSupplierService {
         return created;
     }
 
-    public CD updateCd(Supplier supplier) {
-        CD cd = supplier.getCd();
+    public Cd updateCd(Supplier supplier) {
+        Cd cd = supplier.getCd();
         int boughtQuantity = cd.getBoughtQuantity() + supplier.getCdQuantity();
         cd.setBoughtQuantity(boughtQuantity);
 
-        CD updated = cdRepository.update(cd);
+        Cd updated = cdRepository.update(cd);
         return updated;
     }
 }

@@ -10,32 +10,32 @@ import java.util.UUID;
 
 public class Bill implements Serializable  {
     private String id;
-    private Deque<CD> cds;
+    private Deque<Cd> cds;
     private double total;
-    private LocalDate purchauseDate;
+    private LocalDate issueDate;
     private User issuer;
     private String billInformation;
 
     {
         id = UUID.randomUUID().toString();
-        this.purchauseDate = LocalDate.now();
+        this.issueDate = LocalDate.now();
     }
 
     public Bill() {
         cds = new ArrayDeque<>();
     }
 
-    public Bill(Deque<CD> cds, double total, LocalDate purchauseDate, User issuer) {
+    public Bill(Deque<Cd> cds, double total, LocalDate issueDate, User issuer) {
         this.cds = cds;
         this.total = total;
         this.issuer = issuer;
     }
 
-    public Deque<CD> getCds() {
+    public Deque<Cd> getCds() {
         return cds;
     }
 
-    public void setCds(Deque<CD> cds) {
+    public void setCds(Deque<Cd> cds) {
         this.cds = cds;
     }
 
@@ -47,12 +47,12 @@ public class Bill implements Serializable  {
         this.total = total;
     }
 
-    public LocalDate getPurchauseDate() {
-        return purchauseDate;
+    public LocalDate getIssueDate() {
+        return issueDate;
     }
 
-    public void setPurchauseDate(LocalDate purchauseDate) {
-        this.purchauseDate = purchauseDate;
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
     }
 
     public User getIssuer() {

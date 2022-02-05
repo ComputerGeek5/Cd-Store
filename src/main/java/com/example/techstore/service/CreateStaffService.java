@@ -2,22 +2,27 @@ package com.example.techstore.service;
 
 import com.example.techstore.model.Admin;
 import com.example.techstore.model.Cashier;
-import com.example.techstore.model.Employee;
 import com.example.techstore.model.Manager;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.UserRepository;
 import com.example.techstore.repository.impl.UsersRepositoryImpl;
 import com.example.techstore.util.enumerator.Role;
+import com.example.techstore.validator.StaffValidator;
+import com.example.techstore.validator.impl.StaffValidatorImpl;
 import com.example.techstore.view.CreateStaffView;
 
 import java.time.LocalDate;
-import java.util.Date;
+
+import static com.example.techstore.util.Alerter.showError;
+import static com.example.techstore.validator.StaffValidator.usernameTakenErrorMessage;
 
 public class CreateStaffService {
     private static final UserRepository userRepository;
+    private static final StaffValidator STAFF_VALIDATOR;
 
     static {
         userRepository = new UsersRepositoryImpl();
+        STAFF_VALIDATOR = new StaffValidatorImpl();
     }
 
     public boolean createUser(CreateStaffView createStaffView) {
@@ -44,6 +49,13 @@ public class CreateStaffService {
         }
 
         User created = userRepository.create(user);
-        return created != null;
+        boolean validCreatedUser = STAFF_VALIDATOR.validateCreatedUser(created);
+
+        if (!validCreatedUser) {
+            showError(usernameTakenErrorMessage);
+            return false;
+        }
+
+        return true;
     }
 }

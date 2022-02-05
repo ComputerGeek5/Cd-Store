@@ -1,15 +1,10 @@
 package com.example.techstore.model;
 
-import com.example.techstore.controller.CdController;
-import de.jensd.fx.glyphs.GlyphsDude;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import javafx.scene.control.Button;
-import org.controlsfx.glyphfont.Glyph;
-
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
-public class CD implements Serializable {
+public class Cd implements Serializable {
     private String id;
     private String title;
     private String genre;
@@ -22,16 +17,29 @@ public class CD implements Serializable {
         id = UUID.randomUUID().toString();
     }
 
-    public CD() {
+    public Cd() {
     }
 
-    public CD(String title, String genre, double buyPrice, double sellPrice) {
+    public Cd(String title, String genre, double buyPrice, double sellPrice) {
         this.title = title;
         this.genre = genre;
         this.buyPrice = buyPrice;
         this.boughtQuantity = 0;
         this.sellPrice = sellPrice;
         this.soldQuantity = 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cd cd = (Cd) o;
+        return title.equals(cd.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title);
     }
 
     public String getTitle() {

@@ -1,11 +1,8 @@
 package com.example.techstore.controller;
 
-import com.example.techstore.model.CD;
 import com.example.techstore.service.CreateCdService;
 import com.example.techstore.view.CdView;
 import com.example.techstore.view.CreateCdView;
-import com.example.techstore.view.SupplierView;
-import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;

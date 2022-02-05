@@ -1,6 +1,6 @@
 package com.example.techstore.controller;
 
-import com.example.techstore.model.CD;
+import com.example.techstore.model.Cd;
 import com.example.techstore.model.Supplier;
 import com.example.techstore.service.CreateSupplierService;
 import com.example.techstore.view.CreateSupplierView;
@@ -29,7 +29,7 @@ public class CreateSupplierController {
         Supplier createdSupplier = createSupplierService.create(view);
         
         if (createdSupplier != null) {
-            CD updatedCd = createSupplierService.updateCd(createdSupplier);
+            Cd updatedCd = createSupplierService.updateCd(createdSupplier);
             if (updatedCd != null) {
                 scene = new Scene(new CreateSupplierView(), 1000, 600);
                 stage.setScene(scene);
