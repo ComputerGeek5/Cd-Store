@@ -1,17 +1,14 @@
 package com.example.techstore.controller;
 
 import com.example.techstore.model.Bill;
-import com.example.techstore.model.Cashier;
-import com.example.techstore.model.abst.User;
 import com.example.techstore.service.CashierService;
+import com.example.techstore.util.enumerator.Role;
+import com.example.techstore.view.AdminView;
 import com.example.techstore.view.CashierView;
-import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import static com.example.techstore.util.Constant.appTitle;
 
 public class CashierController {
     private static CashierService cashierService;
@@ -28,6 +25,11 @@ public class CashierController {
 
         Bill created = cashierService.saveBill();
         if (created != null) {
+            boolean savedBillFile = cashierService.saveBillFile(created);
+            if (savedBillFile) {
+//                cashierService.openBillFile(created);
+            }
+
             CashierView view = new CashierView();
             cashierService = new CashierService(new Bill(), view);
 
@@ -45,7 +47,15 @@ public class CashierController {
     }
 
     public static void back(ActionEvent actionEvent) {
-        HomeController.home(actionEvent);
+        if (HomeController.getUser().getRole() == Role.ADMIN) {
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            AdminView view = new AdminView();
+            Scene scene = new Scene(view, 1000, 600);
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            HomeController.home(actionEvent);
+        }
     }
 
     public static CashierService getCashierService() {

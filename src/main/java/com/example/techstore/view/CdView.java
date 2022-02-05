@@ -5,27 +5,35 @@ import com.example.techstore.model.CD;
 import com.example.techstore.service.CdService;
 import com.example.techstore.view.abst.View;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 import java.util.List;
 
 public class CdView extends View {
+    private static final CdService cdService;
+    private static final int rowsPerPage;
+    private static List<CD> cds;
+
+    static {
+        cdService = new CdService();
+        rowsPerPage = 8;
+    }
+
     private AnchorPane anchorPane;
-    private TableView tableView = new TableView<>();
+    private TableView tableView = new TableView();
     private Button back;
     private Label label;
     private Button add;
     private Pagination pagination;
 
-    private static final int rowsPerPage = 5;
-    private static List<CD> cds;
-
     public CdView() {
-        cds = CdController.getCds();
+        cds = cdService.findAll();
 
         anchorPane = new AnchorPane();
         back = new Button();
@@ -44,7 +52,7 @@ public class CdView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(CdController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
@@ -57,7 +65,6 @@ public class CdView extends View {
         TableColumn tableColumn2 = new TableColumn();
         TableColumn tableColumn3 = new TableColumn();
         TableColumn tableColumn4 = new TableColumn();
-        TableColumn tableColumn5 = new TableColumn();
 
         tableColumn.setPrefWidth(130.0);
         tableColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -88,15 +95,12 @@ public class CdView extends View {
         tableColumn4.setCellValueFactory(new PropertyValueFactory<>("soldQuantity"));
         tableColumn4.setText("Sold");
 
-        tableColumn5.setMinWidth(0.0);
-        tableColumn5.setPrefWidth(93.0);
-        tableColumn5.setText("Action");
-
         tableView.getColumns().addAll(tableColumn, tableColumn0, tableColumn1, tableColumn2, tableColumn3, tableColumn4);
+        addButtonColumn();
 
         tableView.setLayoutX(15.0);
         tableView.setLayoutY(180.0);
-        tableView.setPrefHeight(350);
+        tableView.setPrefHeight(350.0);
         tableView.setPrefWidth(970.0);
 
         pagination.setLayoutX(15.0);
@@ -109,7 +113,6 @@ public class CdView extends View {
 
         add.setLayoutX(789.0);
         add.setLayoutY(14.0);
-        add.setMnemonicParsing(false);
         add.setOnAction(CdController::add);
         add.setPrefHeight(40.0);
         add.setPrefWidth(200.0);
@@ -130,5 +133,47 @@ public class CdView extends View {
         tableView.setItems(FXCollections.observableArrayList(cds.subList(fromIndex, toIndex)));
 
         return new AnchorPane();
+    }
+
+    private void addButtonColumn() {
+        TableColumn<CD, Void> tableColumn5 = new TableColumn("Action");
+        tableColumn5.setMinWidth(0.0);
+        tableColumn5.setPrefWidth(93.0);
+
+        Callback<TableColumn<CD, Void>, TableCell<CD, Void>> cellFactory = param -> {
+            final TableCell<CD, Void> cell = new TableCell<>() {
+                private final Button button = new Button("Edit");
+
+                {
+                    button.setPrefHeight(30);
+                    button.setPrefWidth(80.0);
+                    button.getStyleClass().add("button-primary");
+//                    FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+//                    icon.setStyle("-fx-fill: #2be4ea;");
+//                    icon.setSize("1.5em");
+//                    button.setGraphic(icon);
+                    button.setOnAction((ActionEvent actionEvent) -> {
+                        CD cd = getTableView().getItems().get(getIndex());
+                        CdController.edit(actionEvent, cd.getId());
+                    });
+                }
+
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(button);
+                    }
+                }
+            };
+
+            return cell;
+        };
+
+
+        tableColumn5.setCellFactory(cellFactory);
+        tableView.getColumns().add(tableColumn5);
     }
 }

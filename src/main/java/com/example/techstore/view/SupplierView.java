@@ -1,33 +1,60 @@
 package com.example.techstore.view;
 
+import com.example.techstore.controller.EditSupplierController;
 import com.example.techstore.controller.SupplierController;
+import com.example.techstore.model.CD;
+import com.example.techstore.model.Supplier;
+import com.example.techstore.service.SupplierService;
 import com.example.techstore.view.abst.View;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+
+import java.util.List;
 
 public class SupplierView extends View {
-    private final AnchorPane anchorPane;
-    private final Button back;
-    private final TableView tableView;
-    private final TableColumn tableColumn;
-    private final TableColumn tableColumn0;
-    private final TableColumn tableColumn1;
-    private final Label label;
-    private final Button add;
+    private static final SupplierService supplierService;
+    private static final int rowsPerPage;
+    private static List<Supplier> suppliers;
+
+    static {
+        supplierService = new SupplierService();
+        rowsPerPage = 8;
+    }
+
+    private AnchorPane anchorPane;
+    private Button back;
+    private TableView tableView;
+    private TableColumn tableColumn;
+    private TableColumn<Supplier, String> tableColumn0;
+    private TableColumn tableColumn1;
+    private TableColumn tableColumn2;
+    private Label label;
+    private Button add;
+    private Pagination pagination;
 
     public SupplierView() {
+        suppliers = supplierService.getAll();
+
         anchorPane = new AnchorPane();
         back = new Button();
         tableView = new TableView();
         tableColumn = new TableColumn();
         tableColumn0 = new TableColumn();
         tableColumn1 = new TableColumn();
+        tableColumn2 = new TableColumn();
         label = new Label();
         add = new Button();
+        pagination = new Pagination((suppliers.size() / rowsPerPage + 1), 0);
+        pagination.setPageFactory(this::createTable);
+        pagination.setLayoutX(15.0);
+        pagination.setLayoutY(530.0);
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -39,7 +66,7 @@ public class SupplierView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(SupplierController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
@@ -48,19 +75,35 @@ public class SupplierView extends View {
 
         tableView.setLayoutX(14.0);
         tableView.setLayoutY(168.0);
-        tableView.setPrefHeight(420.0);
+        tableView.setPrefHeight(350.0);
         tableView.setPrefWidth(970.0);
 
-        tableColumn.setPrefWidth(361.5999631881714);
+        tableColumn.setPrefWidth(300.0);
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         tableColumn.setText("Name");
 
         tableColumn0.setMinWidth(0.0);
-        tableColumn0.setPrefWidth(304.800048828125);
-        tableColumn0.setText("CD");
+        tableColumn0.setPrefWidth(300.0);
+        tableColumn0.setCellValueFactory( data -> {
+            CD cd = data.getValue().getCd();
+            String title = cd.getTitle();
+            return new ReadOnlyStringWrapper(title);
+        });
+        tableColumn0.setText("Supplier");
 
         tableColumn1.setMinWidth(0.0);
-        tableColumn1.setPrefWidth(305.5999755859375);
-        tableColumn1.setText("Action");
+        tableColumn1.setPrefWidth(200.0);
+        tableColumn1.setCellValueFactory(new PropertyValueFactory<>("cdQuantity"));
+        tableColumn1.setText("Quantity");
+
+        tableColumn2.setMinWidth(0.0);
+        tableColumn2.setPrefWidth(170.0);
+        tableColumn2.setText("Action");
+
+        tableView.getColumns().add(tableColumn);
+        tableView.getColumns().add(tableColumn0);
+        tableView.getColumns().add(tableColumn1);
+        addButtonColumn();
 
         label.setLayoutX(442.0);
         label.setLayoutY(80.0);
@@ -69,7 +112,6 @@ public class SupplierView extends View {
 
         add.setLayoutX(786.0);
         add.setLayoutY(14.0);
-        add.setMnemonicParsing(false);
         add.setOnAction(SupplierController::add);
         add.setPrefHeight(40.0);
         add.setPrefWidth(200.0);
@@ -77,12 +119,56 @@ public class SupplierView extends View {
         add.setText("Add");
 
         anchorPane.getChildren().add(back);
-        tableView.getColumns().add(tableColumn);
-        tableView.getColumns().add(tableColumn0);
-        tableView.getColumns().add(tableColumn1);
         anchorPane.getChildren().add(tableView);
         anchorPane.getChildren().add(label);
         anchorPane.getChildren().add(add);
+        anchorPane.getChildren().add(pagination);
         getChildren().add(anchorPane);
+    }
+
+    private Node createTable(int pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, suppliers.size());
+        tableView.setItems(FXCollections.observableArrayList(suppliers.subList(fromIndex, toIndex)));
+
+        return new AnchorPane();
+    }
+
+    private void addButtonColumn() {
+        TableColumn<Supplier, Void> tableColumn2 = new TableColumn("Action");
+        tableColumn2.setMinWidth(0.0);
+        tableColumn2.setPrefWidth(170.0);
+
+        Callback<TableColumn<Supplier, Void>, TableCell<Supplier, Void>> cellFactory = param -> {
+            final TableCell<Supplier, Void> cell = new TableCell<>() {
+                private final Button button = new Button("Delete");
+
+                {
+                    button.setPrefHeight(30);
+                    button.setPrefWidth(160.0);
+                    button.getStyleClass().add("button-danger");
+                    button.setOnAction((ActionEvent actionEvent) -> {
+                        Supplier supplier = getTableView().getItems().get(getIndex());
+                        EditSupplierController.delete(actionEvent, supplier.getId());
+                    });
+                }
+
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(button);
+                    }
+                }
+            };
+
+            return cell;
+        };
+
+
+        tableColumn2.setCellFactory(cellFactory);
+        tableView.getColumns().add(tableColumn2);
     }
 }

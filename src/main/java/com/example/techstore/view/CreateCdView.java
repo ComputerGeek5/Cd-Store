@@ -40,7 +40,7 @@ public class CreateCdView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(CreateCdController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
@@ -73,7 +73,6 @@ public class CreateCdView extends View {
 
         create.setLayoutX(400.0);
         create.setLayoutY(470.0);
-        create.setMnemonicParsing(false);
         create.setOnAction(CreateCdController::create);
         create.setPrefHeight(40.0);
         create.setPrefWidth(200.0);

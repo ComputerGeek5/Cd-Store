@@ -6,19 +6,19 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.Serializable;
-
 public class AdminView extends View {
     private AnchorPane anchorPane;
     private Button back;
     private Button store;
     private Button staff;
+    private Button billing;
 
     public AdminView() {
         anchorPane = new AnchorPane();
         back = new Button();
         store = new Button();
         staff = new Button();
+        billing = new Button();
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -30,16 +30,23 @@ public class AdminView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(AdminController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
         back.getStyleClass().add("button-primary");
         back.setText("Back");
 
+        billing.setLayoutX(275.0);
+        billing.setLayoutY(383.0);
+        billing.setOnAction(AdminController::cashier);
+        billing.setPrefHeight(40.0);
+        billing.setPrefWidth(200.0);
+        billing.getStyleClass().add("button-primary");
+        billing.setText("Billing");
+        
         store.setLayoutX(275.0);
         store.setLayoutY(458.0);
-        store.setMnemonicParsing(false);
         store.setOnAction(AdminController::manager);
         store.setPrefHeight(40.0);
         store.setPrefWidth(200.0);
@@ -48,7 +55,6 @@ public class AdminView extends View {
 
         staff.setLayoutX(275.0);
         staff.setLayoutY(533.0);
-        staff.setMnemonicParsing(false);
         staff.setOnAction(AdminController::staff);
         staff.setPrefHeight(40.0);
         staff.setPrefWidth(200.0);
@@ -58,6 +64,7 @@ public class AdminView extends View {
         anchorPane.getChildren().add(back);
         anchorPane.getChildren().add(store);
         anchorPane.getChildren().add(staff);
+        anchorPane.getChildren().add(billing);
         getChildren().add(anchorPane);
     }
 }

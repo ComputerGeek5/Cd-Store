@@ -38,7 +38,7 @@ public class CreateSupplierView extends VBox {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(CreateSupplierController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
@@ -53,7 +53,6 @@ public class CreateSupplierView extends VBox {
 
         create.setLayoutX(400.0);
         create.setLayoutY(370.0);
-        create.setMnemonicParsing(false);
         create.setOnAction(CreateSupplierController::create);
         create.setPrefHeight(40.0);
         create.setPrefWidth(200.0);

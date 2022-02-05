@@ -33,7 +33,6 @@ public class SignInView extends View {
 
         signInButton.setLayoutX(300.0);
         signInButton.setLayoutY(540.0);
-        signInButton.setMnemonicParsing(false);
         signInButton.setOnAction(AuthController::signIn);
         signInButton.setPrefHeight(40.0);
         signInButton.setPrefWidth(200.0);
@@ -56,7 +55,7 @@ public class SignInView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(HomeController::home);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);

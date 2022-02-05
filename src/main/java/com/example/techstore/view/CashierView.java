@@ -48,6 +48,7 @@ public class CashierView extends View {
         billInformation.setPrefWidth(400.0);
         billInformation.setEditable(true);
         billInformation.setDisable(true);
+        billInformation.setText("Total:    0.0\n");
         billInformation.setStyle("-fx-opacity: 1.0;");
 
         cd.setLayoutX(14.0);
@@ -65,7 +66,6 @@ public class CashierView extends View {
 
         addToBill.setLayoutX(330.0);
         addToBill.setLayoutY(425.0);
-        addToBill.setMnemonicParsing(false);
         addToBill.setOnAction(CashierController::addToBill);
         addToBill.setPrefHeight(40.0);
         addToBill.setPrefWidth(200.0);
@@ -74,7 +74,6 @@ public class CashierView extends View {
 
         checkOut.setLayoutX(39.0);
         checkOut.setLayoutY(425.0);
-        checkOut.setMnemonicParsing(false);
         checkOut.setOnAction(CashierController::checkOut);
         checkOut.setPrefHeight(40.0);
         checkOut.setPrefWidth(200.0);
@@ -83,7 +82,6 @@ public class CashierView extends View {
 
         removeLast.setLayoutX(330.0);
         removeLast.setLayoutY(500.0);
-        removeLast.setMnemonicParsing(false);
         removeLast.setOnAction(CashierController::removeLast);
         removeLast.setPrefHeight(40.0);
         removeLast.setPrefWidth(200.0);
@@ -92,7 +90,7 @@ public class CashierView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(CashierController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);

@@ -13,7 +13,19 @@ public class CdService {
         cdRepository = new CDRepositoryImpl();
     }
 
-    public List<CD> getAll() {
-        return cdRepository.getAll();
+    public List<CD> findAll() {
+        return cdRepository.findAll();
+    }
+
+    public CD findById(String id) {
+        return cdRepository.findById(id);
+    }
+
+    public CD update(CD newCd) {
+        return cdRepository.update(newCd);
+    }
+
+    public CD delete(CD cd) {
+        return cdRepository.delete(cd);
     }
 }

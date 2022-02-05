@@ -6,14 +6,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.UUID;
 
 public class User implements Cloneable, Serializable {
     private static Logger logger = LogManager.getLogger();
 
+    protected String id;
     protected String name;
     protected String username;
     protected String password;
     protected Role role;
+
+    {
+        id = UUID.randomUUID().toString();
+    }
 
     public User() {
     }
@@ -57,6 +64,14 @@ public class User implements Cloneable, Serializable {
         this.role = role;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public Object clone() {
         Object object = null;
@@ -69,5 +84,13 @@ public class User implements Cloneable, Serializable {
         }
 
         return object;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
     }
 }

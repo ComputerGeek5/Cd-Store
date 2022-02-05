@@ -1,11 +1,17 @@
 package com.example.techstore.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Supplier implements Serializable {
+    private String id;
     private String name;
     private CD cd;
     private int cdQuantity;
+
+    {
+        id = UUID.randomUUID().toString();
+    }
 
     public Supplier() {
     }
@@ -38,5 +44,13 @@ public class Supplier implements Serializable {
 
     public void setCdQuantity(int cdQuantity) {
         this.cdQuantity = cdQuantity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

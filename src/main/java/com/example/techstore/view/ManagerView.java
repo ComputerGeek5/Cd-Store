@@ -30,7 +30,7 @@ public class ManagerView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(ManagerController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
@@ -39,7 +39,6 @@ public class ManagerView extends View {
 
         cd.setLayoutX(270.0);
         cd.setLayoutY(465.0);
-        cd.setMnemonicParsing(false);
         cd.setOnAction(ManagerController::cd);
         cd.setPrefHeight(40.0);
         cd.setPrefWidth(200.0);
@@ -48,7 +47,6 @@ public class ManagerView extends View {
 
         supplier.setLayoutX(270.0);
         supplier.setLayoutY(530.0);
-        supplier.setMnemonicParsing(false);
         supplier.setOnAction(ManagerController::supplier);
         supplier.setPrefHeight(40.0);
         supplier.setPrefWidth(200.0);
@@ -57,7 +55,6 @@ public class ManagerView extends View {
 
         cashier.setLayoutX(270.0);
         cashier.setLayoutY(400.0);
-        cashier.setMnemonicParsing(false);
         cashier.setOnAction(ManagerController::bill);
         cashier.setPrefHeight(40.0);
         cashier.setPrefWidth(200.0);

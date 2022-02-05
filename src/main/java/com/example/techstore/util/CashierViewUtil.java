@@ -11,7 +11,7 @@ public class CashierViewUtil {
     private static final CDRepository cdRepository = new CDRepositoryImpl();
 
     public static void fillComboBoxCdsOptions(ComboBox cdsBox) {
-        List<CD> cds = cdRepository.getAll();
+        List<CD> cds = cdRepository.findAll();
 
         for (CD cd: cds) {
             cdsBox.getItems().add(cd.getTitle());

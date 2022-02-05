@@ -3,10 +3,10 @@ package com.example.techstore.model;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.util.enumerator.Role;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Employee extends User {
-    protected Date birthday;
+    protected LocalDate birthday;
     protected String phone;
     protected String email;
     protected double salary;
@@ -15,7 +15,7 @@ public class Employee extends User {
         super();
     }
 
-    public Employee(String name, String username, String password, Role role, Date birthday, String phone, String email, double salary) {
+    public Employee(String name, String username, String password, Role role, LocalDate birthday, String phone, String email, double salary) {
         super(name, username, password, role);
         this.birthday = birthday;
         this.phone = phone;
@@ -23,11 +23,11 @@ public class Employee extends User {
         this.salary = salary;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

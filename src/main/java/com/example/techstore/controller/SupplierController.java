@@ -7,8 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import static com.example.techstore.util.Constant.appTitle;
-
 public class SupplierController {
     public static void back(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

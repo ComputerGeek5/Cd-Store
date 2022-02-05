@@ -1,13 +1,15 @@
 package com.example.techstore.repository.abst;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface CRUDRepository<T> {
     T create(T t);
 
-    List<T> getAll();
+    T findById(String id);
+
+    Collection<T> findAll();
 
     T update(T t);
 
-    void delete(T t);
+    T delete(T t);
 }

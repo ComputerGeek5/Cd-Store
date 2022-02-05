@@ -1,24 +1,47 @@
 package com.example.techstore.repository.impl;
 
-import com.example.techstore.model.Admin;
-import com.example.techstore.model.Cashier;
-import com.example.techstore.model.Manager;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.UserRepository;
-import com.example.techstore.util.enumerator.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 public class UsersRepositoryImpl implements UserRepository {
     private static final String dataLocation = "./src/main/java/com/example/techstore/data/users.dat";
     private static ObjectOutputStream usersOutput;
 
+    private static Set<User> users;
     private static Logger logger = LogManager.getLogger();
+
+    static {
+        initializeData();
+    }
+
+    private static void initializeData() {
+        users = tryToInitializeData();
+    }
+
+    private static Set<User> tryToInitializeData() {
+        Set<User> users = new HashSet<>();
+
+        try {
+            ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream(dataLocation));
+            users = (HashSet<User>) usersInput.readObject();
+        } catch (FileNotFoundException e) {
+            logger.fatal("Failed to find users data.");
+            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            if (! (e instanceof EOFException)) {
+                logger.fatal("Failed to read users data.");
+                e.printStackTrace();
+            }
+        }
+
+        return users;
+    }
 
     private static void initializeOutput() {
         try {
@@ -32,6 +55,7 @@ public class UsersRepositoryImpl implements UserRepository {
         }
     }
 
+
     @Override
     public User findByUsername(String username) {
         User user = tryToFindUserByUsername(username);
@@ -39,8 +63,6 @@ public class UsersRepositoryImpl implements UserRepository {
     }
 
     private User tryToFindUserByUsername(String username) {
-        List<User> users = getAll();
-
         for (User user: users) {
             if (user.getUsername().equals(username)) {
                 return user;
@@ -58,11 +80,10 @@ public class UsersRepositoryImpl implements UserRepository {
     }
 
     private User tryToCreateUser(User user) {
-        List<User> users = getAll();
         initializeOutput();
 
         try {
-            addUser(user, users);
+            users.add(user);
             usersOutput.writeObject(users);
             usersOutput.flush();
             return user;
@@ -74,43 +95,74 @@ public class UsersRepositoryImpl implements UserRepository {
         return null;
     }
 
-    private void addUser(User user, List<User> users) {
-        if (user.getRole() == Role.ADMIN) {
-            users.add(new Admin(user));
-        } else if (user.getRole() == Role.MANAGER) {
-            users.add(new Manager(user));
-        } else {
-            users.add(new Cashier(user));
-        }
-    }
 
     @Override
-    public List<User> getAll() {
-        try {
-            ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream(dataLocation));
-            return (ArrayList<User>) usersInput.readObject();
-        } catch (FileNotFoundException e) {
-            logger.fatal("Failed to find users data.");
-            e.printStackTrace();
-        } catch (IOException | ClassNotFoundException e) {
-            if (! (e instanceof EOFException)) {
-                logger.fatal("Failed to read users data.");
-                e.printStackTrace();
+    public User findById(String id) {
+        User found = null;
+
+        for(User user: users) {
+            if (user.getId().equals(id)) {
+                found = user;
             }
         }
 
-        return new ArrayList<>();
+        return found;
+    }
+
+
+    @Override
+    public Set<User> findAll() {
+        return users;
     }
 
 
     @Override
     public User update(User user) {
+        initializeOutput();
+        User before = findById(user.getId());
+
+        User updated = tryToUpdateUser(before, user, users);
+        return updated;
+    }
+
+    private static User tryToUpdateUser(User before, User after, Set<User> users) {
+        try {
+            users.remove(before);
+            users.add(after);
+            usersOutput.writeObject(users);
+            usersOutput.flush();
+            usersOutput.close();
+            return after;
+        } catch (IOException e) {
+            logger.fatal("Failed to update cd.");
+            e.printStackTrace();
+        }
+
         return null;
     }
 
 
     @Override
-    public void delete(User user) {
+    public User delete(User user) {
+        initializeOutput();
+        user = findById(user.getId());
 
+        User deleted = tryToDeleteUser(user, users);
+        return deleted;
+    }
+
+    private static User tryToDeleteUser(User user, Set<User> users) {
+        try {
+            users.remove(user);
+            usersOutput.writeObject(users);
+            usersOutput.flush();
+            usersOutput.close();
+            return user;
+        } catch (IOException e) {
+            logger.fatal("Failed to delete supplier.");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

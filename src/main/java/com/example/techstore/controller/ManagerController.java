@@ -1,6 +1,7 @@
 package com.example.techstore.controller;
 
 import com.example.techstore.model.Cashier;
+import com.example.techstore.util.enumerator.Role;
 import com.example.techstore.view.*;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -28,13 +29,21 @@ public class ManagerController {
 
     public static void bill(ActionEvent actionEvent) {
         Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        BillView view = new BillView();
+        BillView view = new BillView(false, null, null);
         Scene scene = new Scene(view, 1000, 600);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void back(ActionEvent actionEvent) {
-        HomeController.home(actionEvent);
+        if (HomeController.getUser().getRole() == Role.ADMIN) {
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            AdminView view = new AdminView();
+            Scene scene = new Scene(view, 1000, 600);
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            HomeController.home(actionEvent);
+        }
     }
 }

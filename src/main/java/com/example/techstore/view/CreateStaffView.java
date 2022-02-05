@@ -1,11 +1,12 @@
 package com.example.techstore.view;
 
 import com.example.techstore.controller.CreateStaffController;
+import com.example.techstore.util.enumerator.Role;
 import com.example.techstore.view.abst.View;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -17,6 +18,10 @@ public class CreateStaffView extends View {
     private TextField name;
     private TextField username;
     private PasswordField password;
+    private TextField phone;
+    private TextField email;
+    private DatePicker birthday;
+    private TextField salary;
     private Button create;
     private ComboBox roles;
 
@@ -26,10 +31,13 @@ public class CreateStaffView extends View {
         name = new TextField();
         username = new TextField();
         password = new PasswordField();
+        phone = new TextField();
+        email = new TextField();
+        birthday = new DatePicker();
+        salary = new TextField();
         create = new Button();
         roles = new ComboBox();
 
-        // TODO
         fillComboBoxRolesOptions(roles);
 
         setPrefHeight(600.0);
@@ -42,7 +50,7 @@ public class CreateStaffView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        back.setMnemonicParsing(false);
+        
         back.setOnAction(CreateStaffController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
@@ -50,36 +58,80 @@ public class CreateStaffView extends View {
         back.setText("Back");
 
         name.setAlignment(javafx.geometry.Pos.CENTER);
-        name.setLayoutX(351.0);
+        name.setLayoutX(100.0);
         name.setLayoutY(115.0);
         name.setPrefWidth(300.0);
         name.setPromptText("Name");
 
         username.setAlignment(javafx.geometry.Pos.CENTER);
-        username.setLayoutX(351.0);
-        username.setLayoutY(200.0);
+        username.setLayoutX(100.0);
+        username.setLayoutY(180.0);
         username.setPrefWidth(300.0);
         username.setPromptText("Username");
 
         password.setAlignment(javafx.geometry.Pos.CENTER);
-        password.setLayoutX(351.0);
-        password.setLayoutY(285.0);
+        password.setLayoutX(600.0);
+        password.setLayoutY(180.0);
         password.setPrefWidth(300.0);
         password.setPromptText("Password");
 
+        phone.setAlignment(javafx.geometry.Pos.CENTER);
+        phone.setLayoutX(100.0);
+        phone.setLayoutY(255.0);
+        phone.setPrefWidth(300.0);
+        phone.setPromptText("Phone");
+
+        email.setAlignment(javafx.geometry.Pos.CENTER);
+        email.setLayoutX(600.0);
+        email.setLayoutY(255.0);
+        email.setPrefWidth(300.0);
+        email.setPromptText("Email");
+
+        birthday.setLayoutX(100.0);
+        birthday.setLayoutY(330.0);
+        birthday.setPrefWidth(300.0);
+        birthday.setPromptText("birthday");
+
+        salary.setAlignment(javafx.geometry.Pos.CENTER);
+        salary.setLayoutX(600.0);
+        salary.setLayoutY(330.0);
+        salary.setPrefWidth(300.0);
+        salary.setPromptText("Salary");
+
         create.setLayoutX(400.0);
         create.setLayoutY(470.0);
-        create.setMnemonicParsing(false);
         create.setOnAction(CreateStaffController::create);
         create.setPrefHeight(40.0);
         create.setPrefWidth(200.0);
         create.getStyleClass().add("button-secondary");
         create.setText("Create");
 
-        roles.setLayoutX(350.0);
-        roles.setLayoutY(370.0);
+        roles.setLayoutX(600.0);
+        roles.setLayoutY(115.0);
         roles.setPrefWidth(300.0);
         roles.setPromptText("Role");
+        roles.valueProperty().addListener(new ChangeListener<Role>() {
+            @Override public void changed(ObservableValue observableValue, Role oldValue, Role newValue) {
+                if (newValue == Role.MANAGER || newValue == Role.CASHIER) {
+                    if (!anchorPane.getChildren().contains(phone)) {
+                        anchorPane.getChildren().add(phone);
+                        anchorPane.getChildren().add(email);
+                        anchorPane.getChildren().add(birthday);
+                        anchorPane.getChildren().add(salary);
+                    }
+                } else {
+                    anchorPane.getChildren().remove(phone);
+                    anchorPane.getChildren().remove(email);
+                    anchorPane.getChildren().remove(birthday);
+                    anchorPane.getChildren().remove(salary);
+                }
+
+                phone.setText("");
+                email.setText("");
+                birthday.setValue(null);
+                salary.setText("");
+            }
+        });
 
         anchorPane.getChildren().add(back);
         anchorPane.getChildren().add(name);
@@ -87,6 +139,7 @@ public class CreateStaffView extends View {
         anchorPane.getChildren().add(password);
         anchorPane.getChildren().add(create);
         anchorPane.getChildren().add(roles);
+
         getChildren().add(anchorPane);
     }
 
@@ -120,5 +173,37 @@ public class CreateStaffView extends View {
 
     public void setRoles(ComboBox roles) {
         this.roles = roles;
+    }
+
+    public TextField getPhone() {
+        return phone;
+    }
+
+    public void setPhone(TextField phone) {
+        this.phone = phone;
+    }
+
+    public TextField getEmail() {
+        return email;
+    }
+
+    public void setEmail(TextField email) {
+        this.email = email;
+    }
+
+    public DatePicker getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(DatePicker birthday) {
+        this.birthday = birthday;
+    }
+
+    public TextField getSalary() {
+        return salary;
+    }
+
+    public void setSalary(TextField salary) {
+        this.salary = salary;
     }
 }

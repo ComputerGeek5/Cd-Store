@@ -16,7 +16,6 @@ public class HomeView extends View {
     private Button signIn;
     private Button signOut;
     private Button exitButton;
-    private Button aboutButton;
 
     public HomeView() {
         anchorPane = new AnchorPane();
@@ -24,7 +23,6 @@ public class HomeView extends View {
         signIn = new Button();
         signOut = new Button();
         exitButton = new Button();
-        aboutButton = new Button();
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -36,7 +34,7 @@ public class HomeView extends View {
 
         signIn.setLayoutX(300.0);
         signIn.setLayoutY(430.0);
-        signIn.setMnemonicParsing(false);
+
         signIn.setOnAction(HomeController::signIn);
         signIn.setPrefHeight(40.0);
         signIn.setPrefWidth(200.0);
@@ -45,7 +43,6 @@ public class HomeView extends View {
 
         signOut.setLayoutX(300.0);
         signOut.setLayoutY(430.0);
-        signOut.setMnemonicParsing(false);
         signOut.setOnAction(AuthController::signOut);
         signOut.setPrefHeight(40.0);
         signOut.setPrefWidth(200.0);
@@ -53,8 +50,7 @@ public class HomeView extends View {
         signOut.setText("Sign Out");
 
         exitButton.setLayoutX(300.0);
-        exitButton.setLayoutY(530.0);
-        exitButton.setMnemonicParsing(false);
+        exitButton.setLayoutY(480.0);
         exitButton.setOnAction(HomeController::exit);
         exitButton.setPrefHeight(40.0);
         exitButton.setPrefWidth(200.0);
@@ -63,20 +59,11 @@ public class HomeView extends View {
 
         home.setLayoutX(300.0);
         home.setLayoutY(380);
-        home.setMnemonicParsing(false);
         home.setOnAction(HomeController::self);
         home.setPrefHeight(40.0);
         home.setPrefWidth(200.0);
         home.getStyleClass().add("button-primary");
         home.setText("Home");
-
-        aboutButton.setLayoutX(300.0);
-        aboutButton.setLayoutY(480.0);
-        aboutButton.setMnemonicParsing(false);
-        aboutButton.setPrefHeight(40.0);
-        aboutButton.setPrefWidth(200.0);
-        aboutButton.getStyleClass().add("button-primary");
-        aboutButton.setText("About");
 
         if (isAuthenticated) {
             anchorPane.getChildren().remove(signIn);
@@ -87,7 +74,6 @@ public class HomeView extends View {
         }
 
         anchorPane.getChildren().add(exitButton);
-        anchorPane.getChildren().add(aboutButton);
 
         if (isAuthenticated) {
             anchorPane.getChildren().add(home);

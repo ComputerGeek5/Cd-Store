@@ -1,14 +1,29 @@
 package com.example.techstore.model;
 
+import com.example.techstore.controller.CdController;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import javafx.scene.control.Button;
+import org.controlsfx.glyphfont.Glyph;
+
 import java.io.Serializable;
+import java.util.UUID;
 
 public class CD implements Serializable {
+    private String id;
     private String title;
     private String genre;
     private double buyPrice;
     private int boughtQuantity;
     private double sellPrice;
     private int soldQuantity;
+
+    {
+        id = UUID.randomUUID().toString();
+    }
+
+    public CD() {
+    }
 
     public CD(String title, String genre, double buyPrice, double sellPrice) {
         this.title = title;
@@ -65,5 +80,13 @@ public class CD implements Serializable {
 
     public void setSoldQuantity(int soldQuantity) {
         this.soldQuantity = soldQuantity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
