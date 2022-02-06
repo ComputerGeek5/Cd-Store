@@ -29,8 +29,8 @@ public class CreateCdController {
 
         if (isCreated) {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            view = new CreateCdView();
-            Scene scene = new Scene(view, 1000, 600);
+            CdView newView  = new CdView();
+            Scene scene = new Scene(newView, 1000, 600);
             stage.setScene(scene);
             stage.show();
         }

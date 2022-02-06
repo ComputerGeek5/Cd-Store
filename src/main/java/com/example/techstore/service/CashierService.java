@@ -5,9 +5,9 @@ import com.example.techstore.model.Bill;
 import com.example.techstore.model.Cd;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.BillRepository;
-import com.example.techstore.repository.CDRepository;
+import com.example.techstore.repository.CdRepository;
 import com.example.techstore.repository.impl.BillRepositoryImpl;
-import com.example.techstore.repository.impl.CDRepositoryImpl;
+import com.example.techstore.repository.impl.CdRepositoryImpl;
 import com.example.techstore.validator.CashierValidator;
 import com.example.techstore.validator.impl.CashierValidatorImpl;
 import com.example.techstore.view.CashierView;
@@ -21,7 +21,7 @@ import static com.example.techstore.util.Alerter.showError;
 import static com.example.techstore.validator.CashierValidator.cdBalanceErrorMessage;
 
 public class CashierService {
-    private static final CDRepository cdRepository;
+    private static final CdRepository cdRepository;
     private static final BillRepository billRepository;
     private static final CashierValidator cashierValidator;
 
@@ -29,7 +29,7 @@ public class CashierService {
     private CashierView view;
 
     static {
-        cdRepository = new CDRepositoryImpl();
+        cdRepository = new CdRepositoryImpl();
         billRepository = new BillRepositoryImpl();
         cashierValidator = new CashierValidatorImpl();
     }

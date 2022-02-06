@@ -4,7 +4,7 @@ import javafx.scene.control.Alert;
 
 public class Alerter {
     private static final String errorHeader = "Error";
-    private static final String warningHeader = "Error";
+    private static final String warningHeader = "Warning";
 
     private static class AlertFactory {
         static Alert createAlert(String type, String message) {
@@ -25,6 +25,11 @@ public class Alerter {
 
     public static void showError(String message) {
         Alert alert = AlertFactory.createAlert("ERROR", message);
+        alert.show();
+    }
+
+    public static void showWarning(String message) {
+        Alert alert = AlertFactory.createAlert("WARNING", message);
         alert.show();
     }
 }

@@ -58,11 +58,6 @@ public class UsersRepositoryImpl implements UserRepository {
 
     @Override
     public User findByUsername(String username) {
-        User user = tryToFindUserByUsername(username);
-        return user;
-    }
-
-    private User tryToFindUserByUsername(String username) {
         for (User user: users) {
             if (user.getUsername().equals(username)) {
                 return user;
@@ -130,9 +125,8 @@ public class UsersRepositoryImpl implements UserRepository {
     private static User tryToUpdateUser(User before, User after, Set<User> users) {
         try {
             users.remove(before);
-            boolean updated = users.add(after);
-
-            if (updated) {
+            boolean unique = users.add(after);
+            if (unique) {
                 usersOutput.writeObject(users);
                 usersOutput.flush();
                 return after;

@@ -83,7 +83,7 @@ public class SupplierView extends View {
         tableColumn.setText("Name");
 
         tableColumn0.setMinWidth(0.0);
-        tableColumn0.setPrefWidth(300.0);
+        tableColumn0.setPrefWidth(370.0);
         tableColumn0.setCellValueFactory( data -> {
             Cd cd = data.getValue().getCd();
             String title = cd.getTitle();
@@ -92,7 +92,7 @@ public class SupplierView extends View {
         tableColumn0.setText("Supplier");
 
         tableColumn1.setMinWidth(0.0);
-        tableColumn1.setPrefWidth(200.0);
+        tableColumn1.setPrefWidth(300.0);
         tableColumn1.setCellValueFactory(new PropertyValueFactory<>("cdQuantity"));
         tableColumn1.setText("Quantity");
 
@@ -103,7 +103,7 @@ public class SupplierView extends View {
         tableView.getColumns().add(tableColumn);
         tableView.getColumns().add(tableColumn0);
         tableView.getColumns().add(tableColumn1);
-        addButtonColumn();
+//        addButtonColumn();
 
         label.setLayoutX(442.0);
         label.setLayoutY(80.0);

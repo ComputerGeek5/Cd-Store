@@ -54,7 +54,7 @@ public class StaffService {
         Employee updated = (Employee) userRepository.update(newEmployee);
         boolean validUpdatedCd = staffValidator.validateUpdatedEmployee(updated);
 
-        if (validUpdatedCd) {
+        if (!validUpdatedCd) {
             showError(usernameTakenErrorMessage);
             return false;
         }

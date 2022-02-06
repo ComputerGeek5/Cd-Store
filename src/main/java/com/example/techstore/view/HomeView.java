@@ -32,33 +32,32 @@ public class HomeView extends View {
         VBox.setVgrow(anchorPane, javafx.scene.layout.Priority.ALWAYS);
         anchorPane.setPrefWidth(1000.0);
 
-        signIn.setLayoutX(300.0);
-        signIn.setLayoutY(430.0);
-
+        signIn.setLayoutX(400.0);
+        signIn.setLayoutY(450.0);
         signIn.setOnAction(HomeController::signIn);
         signIn.setPrefHeight(40.0);
         signIn.setPrefWidth(200.0);
         signIn.getStyleClass().add("button-secondary");
         signIn.setText("Sign In");
 
-        signOut.setLayoutX(300.0);
-        signOut.setLayoutY(380.0);
+        signOut.setLayoutX(400.0);
+        signOut.setLayoutY(375.0);
         signOut.setOnAction(AuthController::signOut);
         signOut.setPrefHeight(40.0);
         signOut.setPrefWidth(200.0);
         signOut.getStyleClass().add("button-danger");
         signOut.setText("Sign Out");
 
-        exitButton.setLayoutX(300.0);
-        exitButton.setLayoutY(480.0);
+        exitButton.setLayoutX(400.0);
+        exitButton.setLayoutY(525.0);
         exitButton.setOnAction(HomeController::exit);
         exitButton.setPrefHeight(40.0);
         exitButton.setPrefWidth(200.0);
         exitButton.getStyleClass().add("button-danger");
         exitButton.setText("Exit");
 
-        home.setLayoutX(300.0);
-        home.setLayoutY(430.0);
+        home.setLayoutX(400.0);
+        home.setLayoutY(450.0);
         home.setOnAction(HomeController::self);
         home.setPrefHeight(40.0);
         home.setPrefWidth(200.0);

@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import static com.example.techstore.util.enumerator.CreateStaffViewUtil.fillComboBoxRolesOptions;
+import static com.example.techstore.util.CreateStaffViewUtil.fillComboBoxRolesOptions;
 
 public class EditStaffView extends View {
     private static final StaffService staffService;
@@ -119,7 +119,7 @@ public class EditStaffView extends View {
         salary.setText(String.valueOf(employee.getSalary()));
 
         update.setLayoutX(400.0);
-        update.setLayoutY(350.0);
+        update.setLayoutY(450.0);
         update.setOnAction((ActionEvent actionEvent) -> EditStaffController.update(actionEvent, this.id));
         update.setPrefHeight(40.0);
         update.setPrefWidth(200.0);
@@ -127,7 +127,7 @@ public class EditStaffView extends View {
         update.setText("Update");
 
         delete.setLayoutX(400.0);
-        delete.setLayoutY(450.0);
+        delete.setLayoutY(525.0);
         delete.setOnAction((ActionEvent actionEvent) -> EditStaffController.delete(actionEvent, this.id));
         delete.setPrefHeight(40.0);
         delete.setPrefWidth(200.0);

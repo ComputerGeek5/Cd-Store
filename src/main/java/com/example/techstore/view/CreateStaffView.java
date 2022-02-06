@@ -5,12 +5,11 @@ import com.example.techstore.util.enumerator.Role;
 import com.example.techstore.view.abst.View;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import static com.example.techstore.util.enumerator.CreateStaffViewUtil.fillComboBoxRolesOptions;
+import static com.example.techstore.util.CreateStaffViewUtil.fillComboBoxRolesOptions;
 
 public class CreateStaffView extends View {
     private AnchorPane anchorPane;

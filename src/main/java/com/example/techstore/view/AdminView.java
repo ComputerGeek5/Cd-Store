@@ -12,7 +12,7 @@ public class AdminView extends View {
     private Button store;
     private Button staff;
     private Button billing;
-    private Button statistics;
+    private Button balance;
 
     public AdminView() {
         anchorPane = new AnchorPane();
@@ -20,7 +20,7 @@ public class AdminView extends View {
         store = new Button();
         staff = new Button();
         billing = new Button();
-        statistics = new Button();
+        balance = new Button();
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -39,33 +39,32 @@ public class AdminView extends View {
         back.getStyleClass().add("button-primary");
         back.setText("Back");
 
-        statistics.setLayoutY(383.0);
-        statistics.setLayoutX(275.0);
-        statistics.setLayoutY(383.0);
-        statistics.setOnAction(AdminController::statistics);
-        statistics.setPrefHeight(40.0);
-        statistics.setPrefWidth(200.0);
-        statistics.getStyleClass().add("button-primary");
-        statistics.setText("Statistics");
+        balance.setLayoutX(400.0);
+        balance.setLayoutY(300.0);
+        balance.setOnAction(AdminController::balance);
+        balance.setPrefHeight(40.0);
+        balance.setPrefWidth(200.0);
+        balance.getStyleClass().add("button-primary");
+        balance.setText("Balance");
 
-        billing.setLayoutX(275.0);
-        billing.setLayoutY(383.0);
+        billing.setLayoutX(400.0);
+        billing.setLayoutY(375.0);
         billing.setOnAction(AdminController::cashier);
         billing.setPrefHeight(40.0);
         billing.setPrefWidth(200.0);
         billing.getStyleClass().add("button-primary");
         billing.setText("Billing");
 
-        store.setLayoutX(275.0);
-        store.setLayoutY(458.0);
+        store.setLayoutX(400.0);
+        store.setLayoutY(450.0);
         store.setOnAction(AdminController::manager);
         store.setPrefHeight(40.0);
         store.setPrefWidth(200.0);
         store.getStyleClass().add("button-primary");
         store.setText("Store");
 
-        staff.setLayoutX(275.0);
-        staff.setLayoutY(533.0);
+        staff.setLayoutX(400.0);
+        staff.setLayoutY(525.0);
         staff.setOnAction(AdminController::staff);
         staff.setPrefHeight(40.0);
         staff.setPrefWidth(200.0);
@@ -73,6 +72,7 @@ public class AdminView extends View {
         staff.setText("Staff");
 
         anchorPane.getChildren().add(back);
+        anchorPane.getChildren().add(balance);
         anchorPane.getChildren().add(store);
         anchorPane.getChildren().add(staff);
         anchorPane.getChildren().add(billing);

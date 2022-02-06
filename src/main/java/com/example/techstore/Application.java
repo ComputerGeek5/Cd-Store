@@ -19,6 +19,7 @@ public class Application extends javafx.application.Application {
         stage.setTitle(appTitle);
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
     }
 
     public static void main(String[] args) {

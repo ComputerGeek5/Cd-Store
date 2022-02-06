@@ -29,13 +29,7 @@ public class StaffView extends View {
     private Button back;
     private Button add;
     private TableView tableView;
-    private TableColumn tableColumn;
-    private TableColumn tableColumn0;
-    private TableColumn tableColumn1;
-    private TableColumn tableColumn2;
-    private TableColumn tableColumn3;
-    private TableColumn tableColumn4;
-    private TableColumn tableColumn5;
+    private TableColumn<Employee, Void> tableColumn5;
     private Label label;
     private Pagination pagination;
 
@@ -46,13 +40,13 @@ public class StaffView extends View {
         back = new Button();
         add = new Button();
         tableView = new TableView();
-        tableColumn = new TableColumn();
-        tableColumn0 = new TableColumn();
-        tableColumn1 = new TableColumn();
-        tableColumn2 = new TableColumn();
-        tableColumn3 = new TableColumn();
-        tableColumn4 = new TableColumn();
-        tableColumn5 = new TableColumn();
+        TableColumn tableColumn = new TableColumn();
+        TableColumn tableColumn0 = new TableColumn();
+        TableColumn tableColumn1 = new TableColumn();
+        TableColumn tableColumn2 = new TableColumn();
+        TableColumn tableColumn3 = new TableColumn();
+        TableColumn tableColumn4 = new TableColumn();
+        tableColumn5 = new TableColumn<>();
         label = new Label();
         pagination = new Pagination((employees.size() / rowsPerPage + 1), 0);
         pagination.setPageFactory(this::createTable);
@@ -138,12 +132,13 @@ public class StaffView extends View {
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, employees.size());
         tableView.setItems(FXCollections.observableArrayList(employees.subList(fromIndex, toIndex)));
-
+        tableView.getColumns().remove(tableColumn5);
+        addButtonColumn();
         return new AnchorPane();
     }
 
     private void addButtonColumn() {
-        TableColumn<Employee, Void> tableColumn5 = new TableColumn("Action");
+        tableColumn5 = new TableColumn("Action");
         tableColumn5.setMinWidth(0.0);
         tableColumn5.setPrefWidth(109.0);
 

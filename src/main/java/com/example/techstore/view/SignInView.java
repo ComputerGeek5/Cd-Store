@@ -31,8 +31,8 @@ public class SignInView extends View {
         VBox.setVgrow(anchorPane, javafx.scene.layout.Priority.ALWAYS);
         anchorPane.setPrefWidth(1000.0);
 
-        signInButton.setLayoutX(300.0);
-        signInButton.setLayoutY(540.0);
+        signInButton.setLayoutX(400.0);
+        signInButton.setLayoutY(525.0);
         signInButton.setOnAction(AuthController::signIn);
         signInButton.setPrefHeight(40.0);
         signInButton.setPrefWidth(200.0);
@@ -40,22 +40,21 @@ public class SignInView extends View {
         signInButton.setText("Sign In");
 
         usernameField.setAlignment(javafx.geometry.Pos.CENTER);
-        usernameField.setLayoutX(250.0);
-        usernameField.setLayoutY(420.0);
-        usernameField.setPrefHeight(40.0);
+        usernameField.setLayoutX(350.0);
+        usernameField.setLayoutY(325.0);
+        usernameField.setPrefHeight(50.0);
         usernameField.setPrefWidth(300.0);
         usernameField.setPromptText("Username");
 
         passwordField.setAlignment(javafx.geometry.Pos.CENTER);
-        passwordField.setLayoutX(251.0);
-        passwordField.setLayoutY(480.0);
-        passwordField.setPrefHeight(40.0);
+        passwordField.setLayoutX(350.0);
+        passwordField.setLayoutY(400.0);
+        passwordField.setPrefHeight(50.0);
         passwordField.setPrefWidth(300.0);
         passwordField.setPromptText("Password");
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-        
         back.setOnAction(HomeController::home);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);

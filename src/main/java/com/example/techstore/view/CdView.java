@@ -2,8 +2,10 @@ package com.example.techstore.view;
 
 import com.example.techstore.controller.CdController;
 import com.example.techstore.model.Cd;
+import com.example.techstore.model.Genre;
 import com.example.techstore.service.CdService;
 import com.example.techstore.view.abst.View;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -28,9 +30,11 @@ public class CdView extends View {
 
     private AnchorPane anchorPane;
     private TableView tableView = new TableView();
+    TableColumn<Cd, Void> tableColumn5;
     private Button back;
     private Label label;
     private Button add;
+    private Button genres;
     private Pagination pagination;
 
     public CdView() {
@@ -41,6 +45,7 @@ public class CdView extends View {
         back = new Button();
         label = new Label();
         add = new Button();
+        genres = new Button();
         pagination = new Pagination((cds.size() / rowsPerPage + 1), 0);
         pagination.setPageFactory(this::createTable);
 
@@ -62,7 +67,7 @@ public class CdView extends View {
         back.setText("Back");
 
         TableColumn tableColumn = new TableColumn<>();
-        TableColumn tableColumn0 = new TableColumn();
+        TableColumn<Cd, String> tableColumn0 = new TableColumn<>();
         TableColumn tableColumn1 = new TableColumn();
         TableColumn tableColumn2 = new TableColumn();
         TableColumn tableColumn3 = new TableColumn();
@@ -74,7 +79,11 @@ public class CdView extends View {
 
         tableColumn0.setMinWidth(0.0);
         tableColumn0.setPrefWidth(139.0);
-        tableColumn0.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        tableColumn0.setCellValueFactory(data -> {
+            Genre genre = data.getValue().getGenre();
+            String name = genre.getName();
+            return new ReadOnlyStringWrapper(name);
+        });
         tableColumn0.setText("Genre");
 
         tableColumn1.setMinWidth(0.0);
@@ -121,11 +130,20 @@ public class CdView extends View {
         add.getStyleClass().add("button-secondary");
         add.setText("Add");
 
+        genres.setLayoutX(789.0);
+        genres.setLayoutY(75.0);
+        genres.setOnAction(CdController::genres);
+        genres.setPrefHeight(40.0);
+        genres.setPrefWidth(200.0);
+        genres.getStyleClass().add("button-primary");
+        genres.setText("Genres");
+
         anchorPane.getChildren().add(back);
         anchorPane.getChildren().add(tableView);
         anchorPane.getChildren().add(pagination);
         anchorPane.getChildren().add(label);
         anchorPane.getChildren().add(add);
+        anchorPane.getChildren().add(genres);
         getChildren().add(anchorPane);
     }
 
@@ -133,12 +151,13 @@ public class CdView extends View {
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, cds.size());
         tableView.setItems(FXCollections.observableArrayList(cds.subList(fromIndex, toIndex)));
-
+        tableView.getColumns().remove(tableColumn5);
+        addButtonColumn();
         return new AnchorPane();
     }
 
     private void addButtonColumn() {
-        TableColumn<Cd, Void> tableColumn5 = new TableColumn("Action");
+        tableColumn5 = new TableColumn("Action");
         tableColumn5.setMinWidth(0.0);
         tableColumn5.setPrefWidth(93.0);
 
@@ -150,10 +169,6 @@ public class CdView extends View {
                     button.setPrefHeight(30);
                     button.setPrefWidth(80.0);
                     button.getStyleClass().add("button-primary");
-//                    FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
-//                    icon.setStyle("-fx-fill: #2be4ea;");
-//                    icon.setSize("1.5em");
-//                    button.setGraphic(icon);
                     button.setOnAction((ActionEvent actionEvent) -> {
                         Cd cd = getTableView().getItems().get(getIndex());
                         CdController.edit(actionEvent, cd.getId());

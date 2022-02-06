@@ -31,7 +31,8 @@ public class CreateSupplierController {
         if (createdSupplier != null) {
             Cd updatedCd = createSupplierService.updateCd(createdSupplier);
             if (updatedCd != null) {
-                scene = new Scene(new CreateSupplierView(), 1000, 600);
+                SupplierView newView = new SupplierView();
+                scene = new Scene(newView, 1000, 600);
                 stage.setScene(scene);
                 stage.show();
             }

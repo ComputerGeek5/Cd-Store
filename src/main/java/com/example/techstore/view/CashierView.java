@@ -9,8 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import static com.example.techstore.util.CashierViewUtil.fillComboBoxCdsOptions;
-import static com.example.techstore.util.enumerator.CreateStaffViewUtil.fillComboBoxRolesOptions;
+import static com.example.techstore.util.CashierUtil.fillComboBoxCdsOptions;
 
 public class CashierView extends View {
     private AnchorPane anchorPane;

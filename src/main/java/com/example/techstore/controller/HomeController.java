@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 import static com.example.techstore.util.Constant.appTitle;
+import static com.example.techstore.util.MangerUtil.showLowGenres;
 
 public class HomeController {
     private static User user;
@@ -49,6 +50,7 @@ public class HomeController {
             view = new AdminView();
         } else if (user.getRole()  == Role.MANAGER) {
             view = new ManagerView();
+            showLowGenres();
         } else {
             view = new CashierView();
 

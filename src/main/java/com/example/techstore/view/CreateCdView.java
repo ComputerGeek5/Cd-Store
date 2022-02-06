@@ -1,16 +1,29 @@
 package com.example.techstore.view;
 
 import com.example.techstore.controller.CreateCdController;
+import com.example.techstore.model.Genre;
+import com.example.techstore.service.GenreService;
 import com.example.techstore.view.abst.View;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
+
+import static com.example.techstore.util.CreateCdViewUtil.fillComboBoxGenresOptions;
 
 public class CreateCdView extends View {
+    private static final GenreService genreService;
+
+    static {
+        genreService = new GenreService();
+    }
+
     private AnchorPane anchorPane;
     private Button back;
     private TextField title;
-    private TextField genre;
+    private ComboBox<Genre> genres;
     private TextField buyPrice;
     private TextField sellPrice;
     private Button create;
@@ -19,7 +32,7 @@ public class CreateCdView extends View {
         anchorPane = new AnchorPane();
         back = new Button();
         title = new TextField();
-        genre = new TextField();
+        genres = new ComboBox<>();
         buyPrice = new TextField();
         sellPrice = new TextField();
         create = new Button();
@@ -47,11 +60,35 @@ public class CreateCdView extends View {
         title.setPrefWidth(300.0);
         title.setPromptText("Title");
 
-        genre.setAlignment(javafx.geometry.Pos.CENTER);
-        genre.setLayoutX(351.0);
-        genre.setLayoutY(200.0);
-        genre.setPrefWidth(300.0);
-        genre.setPromptText("Genre");
+        genres.setLayoutX(351.0);
+        genres.setLayoutY(200.0);
+        genres.setPrefWidth(300.0);
+        genres.setPromptText("Genre");
+        fillComboBoxGenresOptions(genres);
+        Callback<ListView<Genre>, ListCell<Genre>> factory = lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(Genre genre, boolean empty) {
+                super.updateItem(genre, empty);
+                if (genre == null || empty) {
+                    setGraphic(null);
+                } else {
+                    setText(genre.getName());
+                }
+            }
+        };
+        genres.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Genre genre) {
+                return genre.getName();
+            }
+
+            @Override
+            public Genre fromString(String name) {
+                return genreService.findGenreByName(name);
+            }
+        });
+        genres.setCellFactory(factory);
+
 
         buyPrice.setAlignment(javafx.geometry.Pos.CENTER);
         buyPrice.setLayoutX(351.0);
@@ -75,7 +112,7 @@ public class CreateCdView extends View {
 
         anchorPane.getChildren().add(back);
         anchorPane.getChildren().add(title);
-        anchorPane.getChildren().add(genre);
+        anchorPane.getChildren().add(genres);
         anchorPane.getChildren().add(buyPrice);
         anchorPane.getChildren().add(sellPrice);
         anchorPane.getChildren().add(create);
@@ -106,12 +143,12 @@ public class CreateCdView extends View {
         this.title = title;
     }
 
-    public TextField getGenre() {
-        return genre;
+    public ComboBox<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGenre(TextField genre) {
-        this.genre = genre;
+    public void setGenres(ComboBox<Genre> genres) {
+        this.genres = genres;
     }
 
     public TextField getBuyPrice() {

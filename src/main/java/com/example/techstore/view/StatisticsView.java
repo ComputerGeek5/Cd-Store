@@ -1,44 +1,37 @@
 package com.example.techstore.view;
 
-import com.example.techstore.controller.BillController;
-import com.example.techstore.statistics.StoreStatistic;
+import com.example.techstore.controller.StatisticsController;
 import com.example.techstore.view.abst.View;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.FXCollections;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.example.techstore.util.StoreStatisticsUtil.*;
+import static com.example.techstore.util.CdStatisticUtil.*;
 
 public class StatisticsView extends View {
-    private static final int rowsPerPage;
-    private static List<StoreStatistic> storeStatistics;
-
-    static {
-        rowsPerPage = 5;
-    }
+    private static List<PieChart.Data> cdsBoughtByGenre;
+    private static List<PieChart.Data> cdsSoldByGenre;
 
     private AnchorPane anchorPane;
     private Button back;
     private Button search;
-    private TableView tableView;
-    private TableColumn tableColumn;
-    private TableColumn tableColumn0;
-    private DatePicker fromDate;
-    private DatePicker toDate;
+    private PieChart cdsSoldByGenrePieChart;
+    private PieChart cdsBoughtByGenrePieChart;
+    private DatePicker fromDatePicker;
+    private DatePicker toDatePicker;
 
     public StatisticsView(boolean searching, LocalDate fromDate, LocalDate toDate) {
         anchorPane = new AnchorPane();
         back = new Button();
         search = new Button();
-        tableView = new TableView();
-        tableColumn = new TableColumn();
-        tableColumn0 = new TableColumn();
-        this.fromDate = new DatePicker();
-        this.toDate = new DatePicker();
+        fromDatePicker = new DatePicker();
+        toDatePicker = new DatePicker();
 
         setPrefHeight(600.0);
         setPrefWidth(1000.0);
@@ -50,82 +43,82 @@ public class StatisticsView extends View {
 
         back.setLayoutX(14.0);
         back.setLayoutY(14.0);
-
-        back.setOnAction(BillController::back);
+        back.setOnAction(StatisticsController::back);
         back.setPrefHeight(40.0);
         back.setPrefWidth(200.0);
         back.getStyleClass().add("button-primary");
         back.setText("Back");
 
-        search.setLayoutX(750.0);
-        search.setLayoutY(100.0);
-        search.setOnAction(BillController::search);
+        search.setLayoutX(764.0);
+        search.setLayoutY(14.0);
+        search.setOnAction(StatisticsController::search);
         search.setPrefHeight(40.0);
         search.setPrefWidth(200.0);
         search.getStyleClass().add("button-secondary");
         search.setText("Search");
 
-        tableView.setLayoutX(15.0);
-        tableView.setLayoutY(166.0);
-        tableView.setPrefHeight(400.0);
-        tableView.setPrefWidth(970.0);
+        fromDatePicker.setLayoutX(264.0);
+        fromDatePicker.setLayoutY(14.0);
+        fromDatePicker.setPrefWidth(200.0);
+        fromDatePicker.setPromptText("From Date");
+        fromDatePicker.setValue(fromDate);
 
-        this.fromDate.setLayoutX(500);
-        this.fromDate.setLayoutY(14.0);
-        this.fromDate.setPrefWidth(200.0);
-        this.fromDate.setPromptText("From Date");
-        this.fromDate.setValue(fromDate);
-
-        this.toDate.setLayoutX(750);
-        this.toDate.setLayoutY(14.0);
-        this.toDate.setPrefWidth(200.0);
-        this.toDate.setPromptText("To Date");
-        this.toDate.setValue(toDate);
+        toDatePicker.setLayoutX(514.0);
+        toDatePicker.setLayoutY(14.0);
+        toDatePicker.setPrefWidth(200.0);
+        toDatePicker.setPromptText("To Date");
+        toDatePicker.setValue(toDate);
 
         if (searching) {
-            LocalDate fromDateValue = this.fromDate.getValue();
-            LocalDate toDateValue = this.toDate.getValue();
+            LocalDate fromDateValue = fromDatePicker.getValue();
+            LocalDate toDateValue = toDatePicker.getValue();
 
-            storeStatistics = search(fromDateValue, toDateValue);
+            cdsBoughtByGenre = searchCdsBoughtByGenre(fromDateValue, toDateValue);
+            cdsSoldByGenre = searchCdsSoldByGenre(fromDateValue, toDateValue);
 
-            this.fromDate.setValue(null);
-            this.toDate.setValue(null);
+            fromDatePicker.setValue(null);
+            toDatePicker.setValue(null);
         } else {
-            storeStatistics = search(null, null);
+            cdsBoughtByGenre = searchCdsBoughtByGenre(null, null);
+            cdsSoldByGenre = searchCdsSoldByGenre(null, null);
         }
 
-        tableColumn.setPrefWidth(231.0);
-        tableColumn.setCellValueFactory(new PropertyValueFactory<>("source"));
-        tableColumn.setText("Source");
+        cdsSoldByGenrePieChart = new PieChart(FXCollections.observableList(cdsSoldByGenre));
+        cdsSoldByGenrePieChart.setLayoutX(15.0);
+        cdsSoldByGenrePieChart.setLayoutY(100.0);
+        cdsSoldByGenrePieChart.setPrefHeight(450.0);
+        cdsSoldByGenrePieChart.setPrefWidth(450.0);
+        cdsSoldByGenrePieChart.setTitle("Cds Sold By Genre");
 
-        tableColumn0.setMinWidth(0.0);
-        tableColumn0.setPrefWidth(232.0);
-        tableColumn0.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        tableColumn0.setText("Amount");
-
-        tableView.getColumns().addAll(tableColumn, tableColumn0);
+        cdsBoughtByGenrePieChart = new PieChart(FXCollections.observableList(cdsBoughtByGenre));
+        cdsBoughtByGenrePieChart.setLayoutX(535.0);
+        cdsBoughtByGenrePieChart.setLayoutY(100.0);
+        cdsBoughtByGenrePieChart.setPrefHeight(450.0);
+        cdsBoughtByGenrePieChart.setPrefWidth(450.0);
+        cdsBoughtByGenrePieChart.setTitle("Cds Bought By Genre");
 
         anchorPane.getChildren().add(back);
-        anchorPane.getChildren().add(tableView);
-        anchorPane.getChildren().add(this.fromDate);
-        anchorPane.getChildren().add(this.toDate);
+        anchorPane.getChildren().add(cdsSoldByGenrePieChart);
+        anchorPane.getChildren().add(cdsBoughtByGenrePieChart);
+        anchorPane.getChildren().add(fromDatePicker);
+        anchorPane.getChildren().add(toDatePicker);
         anchorPane.getChildren().add(search);
         getChildren().add(anchorPane);
     }
 
-    public DatePicker getFromDate() {
-        return fromDate;
+    public DatePicker getFromDatePicker() {
+        return fromDatePicker;
     }
 
-    public void setFromDate(DatePicker fromDate) {
-        this.fromDate = fromDate;
+    public void setFromDatePicker(DatePicker fromDatePicker) {
+        this.fromDatePicker = fromDatePicker;
     }
 
-    public DatePicker getToDate() {
-        return toDate;
+    public DatePicker getToDatePicker() {
+        return toDatePicker;
     }
 
-    public void setToDate(DatePicker toDate) {
-        this.toDate = toDate;
+    public void setToDatePicker(DatePicker toDatePicker) {
+        this.toDatePicker = toDatePicker;
     }
 }

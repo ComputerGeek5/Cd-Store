@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Cd implements Serializable {
     private String id;
     private String title;
-    private String genre;
+    private Genre genre;
     private double buyPrice;
     private int boughtQuantity;
     private double sellPrice;
@@ -20,7 +20,7 @@ public class Cd implements Serializable {
     public Cd() {
     }
 
-    public Cd(String title, String genre, double buyPrice, double sellPrice) {
+    public Cd(String title, Genre genre, double buyPrice, double sellPrice) {
         this.title = title;
         this.genre = genre;
         this.buyPrice = buyPrice;
@@ -50,11 +50,11 @@ public class Cd implements Serializable {
         this.title = title;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 

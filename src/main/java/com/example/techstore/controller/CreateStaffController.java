@@ -5,6 +5,7 @@ import com.example.techstore.view.CreateCdView;
 import com.example.techstore.view.CreateStaffView;
 import com.example.techstore.view.StaffView;
 import com.example.techstore.view.SupplierView;
+import com.example.techstore.view.abst.View;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -33,8 +34,8 @@ public class CreateStaffController {
 
         if (isCreated) {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            view = new CreateStaffView();
-            Scene scene = new Scene(view, 1000, 600);
+            View newView = new StaffView();
+            Scene scene = new Scene(newView, 1000, 600);
             stage.setScene(scene);
             stage.show();
         }

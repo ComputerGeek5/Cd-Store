@@ -2,19 +2,19 @@ package com.example.techstore.service;
 
 import com.example.techstore.model.Cd;
 import com.example.techstore.model.Supplier;
-import com.example.techstore.repository.CDRepository;
+import com.example.techstore.repository.CdRepository;
 import com.example.techstore.repository.SupplierRepository;
-import com.example.techstore.repository.impl.CDRepositoryImpl;
+import com.example.techstore.repository.impl.CdRepositoryImpl;
 import com.example.techstore.repository.impl.SupplierRepositoryImpl;
 import com.example.techstore.view.CreateSupplierView;
 
 public class CreateSupplierService {
     private static final SupplierRepository supplierRepository;
-    private static final CDRepository cdRepository;
+    private static final CdRepository cdRepository;
 
     static {
         supplierRepository = new SupplierRepositoryImpl();
-        cdRepository = new CDRepositoryImpl();
+        cdRepository = new CdRepositoryImpl();
     }
 
     public Supplier create(CreateSupplierView view) {
