@@ -1,5 +1,6 @@
 package com.example.techstore.repository.impl;
 
+import com.example.techstore.Application;
 import com.example.techstore.model.Genre;
 import com.example.techstore.repository.GenreRepository;
 import org.apache.logging.log4j.LogManager;
@@ -8,8 +9,14 @@ import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.util.*;
 
+import static com.example.techstore.util.Constant.baseLocation;
+
 public class GenreRepositoryImpl implements GenreRepository {
-    private static final String dataLocation = "./src/main/java/com/example/techstore/data/genres.dat";
+//        Test
+//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/genres.dat";
+
+//        Production
+    private static String dataLocation = baseLocation + "/data/genres.dat";
     private static ObjectOutputStream genresOutput;
 
     private static Set<Genre> genres;

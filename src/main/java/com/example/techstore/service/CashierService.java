@@ -16,8 +16,12 @@ import javafx.scene.control.TextArea;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static com.example.techstore.util.Alerter.showError;
+import static com.example.techstore.util.Constant.baseLocation;
 import static com.example.techstore.validator.CashierValidator.cdBalanceErrorMessage;
 
 public class CashierService {
@@ -51,11 +55,16 @@ public class CashierService {
     }
 
     public boolean saveBillFile(Bill bill) {
-        File resources = new File("./src/main/resources/com/example/techstore/static/data/dummy.txt");
-        String billDataLocation = resources.getAbsolutePath();
-        billDataLocation = billDataLocation.substring(0, billDataLocation.lastIndexOf("\\"));
-        String fileLocation = billDataLocation + "\\bill_" + bill.getId() + ".txt";
-        File billFile = new File(fileLocation);
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+        String timestamp =  now.format(formatter);
+//            Test
+//        String dataLocation = "./src/main/resources/com/example/techstore/static/bills/bill_" + timestamp;
+
+//            Production
+        String dataLocation = baseLocation + "/bills/bill_" + timestamp;
+        File billFile = new File(dataLocation);
 
         tryToSaveBillFile(billFile);
         boolean saved = tryToWriteBillInformation(billFile, bill.getBillInformation());

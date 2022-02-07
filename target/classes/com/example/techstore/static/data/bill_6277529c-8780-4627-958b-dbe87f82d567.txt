@@ -1,5 +1,0 @@
-Total:    500.0
-
-CD Title:    California Love
-Quantity:    5
-Price:    500.0

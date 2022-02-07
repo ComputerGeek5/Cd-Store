@@ -1,5 +1,6 @@
 package com.example.techstore.repository.impl;
 
+import com.example.techstore.Application;
 import com.example.techstore.model.Cd;
 import com.example.techstore.repository.CdRepository;
 import org.apache.logging.log4j.LogManager;
@@ -8,8 +9,14 @@ import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.util.*;
 
+import static com.example.techstore.util.Constant.baseLocation;
+
 public class CdRepositoryImpl implements CdRepository {
-    private static final String dataLocation = "./src/main/java/com/example/techstore/data/cds.dat";
+    //        Test
+//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/cds.dat";
+
+    //        Production
+    private static String dataLocation = baseLocation + "/data/cds.dat";
     private static ObjectOutputStream cdsOutput;
 
     private static Set<Cd> cds;
@@ -155,7 +162,7 @@ public class CdRepositoryImpl implements CdRepository {
             cdsOutput.flush();
             return cd;
         } catch (IOException e) {
-            logger.fatal("Failed to delete supplier.");
+            logger.fatal("Failed to delete cd.");
             e.printStackTrace();
         }
 

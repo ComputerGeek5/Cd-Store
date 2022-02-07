@@ -1,19 +1,28 @@
 package com.example.techstore.repository.impl;
 
+import com.example.techstore.Main;
 import com.example.techstore.model.abst.User;
 import com.example.techstore.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 import java.io.*;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+
+import static com.example.techstore.util.Constant.baseLocation;
 
 public class UsersRepositoryImpl implements UserRepository {
-    private static final String dataLocation = "./src/main/java/com/example/techstore/data/users.dat";
+    //        Test
+//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/users.dat";
+
+    //        Production
+    private static String dataLocation = baseLocation + "/data/users.dat";
     private static ObjectOutputStream usersOutput;
 
     private static Set<User> users;
+
     private static Logger logger = LogManager.getLogger();
 
     static {
@@ -132,7 +141,7 @@ public class UsersRepositoryImpl implements UserRepository {
                 return after;
             }
         } catch (IOException e) {
-            logger.fatal("Failed to update cd.");
+            logger.fatal("Failed to update user.");
             e.printStackTrace();
         }
 
@@ -156,7 +165,7 @@ public class UsersRepositoryImpl implements UserRepository {
             usersOutput.flush();
             return user;
         } catch (IOException e) {
-            logger.fatal("Failed to delete supplier.");
+            logger.fatal("Failed to delete user.");
             e.printStackTrace();
         }
 
