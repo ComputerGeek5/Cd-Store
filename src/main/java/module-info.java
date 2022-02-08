@@ -12,6 +12,7 @@ module com.example.techstore {
     requires javafx.graphics;
     requires javafx.base;
     requires org.apache.logging.log4j;
+    requires org.apache.commons.io;
 
     opens com.example.techstore to javafx.fxml, javafx.base;
     exports com.example.techstore;

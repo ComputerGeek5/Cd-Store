@@ -1,5 +1,6 @@
 package com.example.techstore.repository.impl;
 
+import com.example.techstore.Application;
 import com.example.techstore.model.Bill;
 import com.example.techstore.repository.BillRepository;
 import org.apache.logging.log4j.LogManager;
@@ -10,8 +11,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.example.techstore.util.Constant.baseLocation;
+
 public class BillRepositoryImpl implements BillRepository {
-    private static final String dataLocation = "./src/main/java/com/example/techstore/data/bills.dat";
+    //        Test
+//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/bills.dat";
+
+    //        Production
+    private static String dataLocation = baseLocation + "/data/bills.dat";
     private static ObjectOutputStream billsOutput;
 
     private static List<Bill> bills;
@@ -118,7 +125,7 @@ public class BillRepositoryImpl implements BillRepository {
                 return bill;
             }
         } catch (IOException e) {
-            logger.fatal("Failed to update cd.");
+            logger.fatal("Failed to update bill.");
             e.printStackTrace();
         }
 
@@ -144,7 +151,7 @@ public class BillRepositoryImpl implements BillRepository {
                 return bill;
             }
         } catch (IOException e) {
-            logger.fatal("Failed to delete supplier.");
+            logger.fatal("Failed to delete bill.");
             e.printStackTrace();
         }
 

@@ -1,5 +1,6 @@
 package com.example.techstore.repository.impl;
 
+import com.example.techstore.Application;
 import com.example.techstore.model.Supplier;
 import com.example.techstore.repository.SupplierRepository;
 import org.apache.logging.log4j.LogManager;
@@ -9,8 +10,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.techstore.util.Constant.baseLocation;
+
 public class SupplierRepositoryImpl implements SupplierRepository {
-    private static final String dataLocation = "./src/main/java/com/example/techstore/data/suppliers.dat";
+//    Test
+//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/suppliers.dat";
+
+//    Production
+    private static String dataLocation = baseLocation + "/data/suppliers.dat";
     private static ObjectOutputStream suppliersOutput;
 
     private static List<Supplier> suppliers;
@@ -119,7 +126,7 @@ public class SupplierRepositoryImpl implements SupplierRepository {
                 return supplier;
             }
         } catch (IOException e) {
-            logger.fatal("Failed to update cd.");
+            logger.fatal("Failed to update supplier.");
             e.printStackTrace();
         }
 

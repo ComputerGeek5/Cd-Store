@@ -89,6 +89,7 @@ com\example\techstore\view\SupplierView$1.class
 com\example\techstore\controller\AdminController.class
 com\example\techstore\controller\CdController.class
 com\example\techstore\statistics\BalanceStatistic.class
+com\example\techstore\Main.class
 com\example\techstore\validator\CdValidator.class
 com\example\techstore\repository\impl\SupplierRepositoryImpl.class
 com\example\techstore\controller\EditCdController.class
