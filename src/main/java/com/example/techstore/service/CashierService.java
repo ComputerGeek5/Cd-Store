@@ -51,7 +51,14 @@ public class CashierService {
         for (Cd cd: bill.getCds()) {
             cdRepository.update(cd);
         }
-        return billRepository.create(bill);
+
+//        boolean validBill = cashierValidator.validateBill(bill);
+
+//        if (validBill) {
+            return billRepository.create(bill);
+//        }
+
+//        return null;
     }
 
     public boolean saveBillFile(Bill bill) {
@@ -60,10 +67,10 @@ public class CashierService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
         String timestamp =  now.format(formatter);
 //            Test
-//        String dataLocation = "./src/main/resources/com/example/techstore/static/bills/bill_" + timestamp;
+        String dataLocation = "./src/main/resources/com/example/techstore/static/bills/bill_" + timestamp;
 
 //            Production
-        String dataLocation = baseLocation + "/bills/bill_" + timestamp;
+//        String dataLocation = baseLocation + "/bills/bill_" + timestamp;
         File billFile = new File(dataLocation);
 
         tryToSaveBillFile(billFile);

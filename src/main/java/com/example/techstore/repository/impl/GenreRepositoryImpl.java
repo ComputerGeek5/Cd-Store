@@ -13,10 +13,10 @@ import static com.example.techstore.util.Constant.baseLocation;
 
 public class GenreRepositoryImpl implements GenreRepository {
 //        Test
-//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/genres.dat";
+    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/genres.dat";
 
 //        Production
-    private static String dataLocation = baseLocation + "/data/genres.dat";
+//    private static String dataLocation = baseLocation + "/data/genres.dat";
     private static ObjectOutputStream genresOutput;
 
     private static Set<Genre> genres;

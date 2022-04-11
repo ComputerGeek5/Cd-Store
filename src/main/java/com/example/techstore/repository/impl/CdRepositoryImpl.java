@@ -13,10 +13,10 @@ import static com.example.techstore.util.Constant.baseLocation;
 
 public class CdRepositoryImpl implements CdRepository {
     //        Test
-//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/cds.dat";
+    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/cds.dat";
 
     //        Production
-    private static String dataLocation = baseLocation + "/data/cds.dat";
+//    private static String dataLocation = baseLocation + "/data/cds.dat";
     private static ObjectOutputStream cdsOutput;
 
     private static Set<Cd> cds;

@@ -14,10 +14,10 @@ import static com.example.techstore.util.Constant.baseLocation;
 
 public class SupplierRepositoryImpl implements SupplierRepository {
 //    Test
-//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/suppliers.dat";
+    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/suppliers.dat";
 
 //    Production
-    private static String dataLocation = baseLocation + "/data/suppliers.dat";
+//    private static String dataLocation = baseLocation + "/data/suppliers.dat";
     private static ObjectOutputStream suppliersOutput;
 
     private static List<Supplier> suppliers;

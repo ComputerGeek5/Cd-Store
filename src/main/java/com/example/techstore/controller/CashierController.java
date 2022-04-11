@@ -26,16 +26,15 @@ public class CashierController {
         Bill created = cashierService.saveBill();
         if (created != null) {
             boolean savedBillFile = cashierService.saveBillFile(created);
+
             if (savedBillFile) {
-//                cashierService.openBillFile(created);
+                CashierView view = new CashierView();
+                cashierService = new CashierService(new Bill(), view);
+
+                Scene scene = new Scene(view, 1000, 600);
+                stage.setScene(scene);
+                stage.show();
             }
-
-            CashierView view = new CashierView();
-            cashierService = new CashierService(new Bill(), view);
-
-            Scene scene = new Scene(view, 1000, 600);
-            stage.setScene(scene);
-            stage.show();
         }
     }
 

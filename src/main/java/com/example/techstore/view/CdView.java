@@ -76,7 +76,6 @@ public class CdView extends View {
         tableColumn.setPrefWidth(130.0);
         tableColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         tableColumn.setText("Title");
-
         tableColumn0.setMinWidth(0.0);
         tableColumn0.setPrefWidth(139.0);
         tableColumn0.setCellValueFactory(data -> {

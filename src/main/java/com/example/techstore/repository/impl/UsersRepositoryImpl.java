@@ -15,10 +15,10 @@ import static com.example.techstore.util.Constant.baseLocation;
 
 public class UsersRepositoryImpl implements UserRepository {
     //        Test
-//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/users.dat";
+    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/users.dat";
 
     //        Production
-    private static String dataLocation = baseLocation + "/data/users.dat";
+//    private static String dataLocation = baseLocation + "/data/users.dat";
     private static ObjectOutputStream usersOutput;
 
     private static Set<User> users;

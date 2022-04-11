@@ -104,6 +104,7 @@ public class EditCdView extends View {
                 return genreService.findGenreByName(name);
             }
         });
+        genres.setValue(cd.getGenre());
         genres.setCellFactory(factory);
         genres.setDisable(true);
         genres.setStyle("-fx-opacity: 1.0;");

@@ -42,7 +42,7 @@ public class CdService {
         Cd updated = cdRepository.update(newCd);
         boolean validUpdatedCd = cdValidator.validateUpdatedCd(updated);
 
-        if (validUpdatedCd) {
+        if (!validUpdatedCd) {
             showError(cdExistsErrorMessage);
             return false;
         }

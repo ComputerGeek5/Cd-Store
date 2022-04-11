@@ -15,10 +15,10 @@ import static com.example.techstore.util.Constant.baseLocation;
 
 public class BillRepositoryImpl implements BillRepository {
     //        Test
-//    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/bills.dat";
+    private static final String dataLocation = "./src/main/resources/com/example/techstore/static/data/bills.dat";
 
     //        Production
-    private static String dataLocation = baseLocation + "/data/bills.dat";
+//    private static String dataLocation = baseLocation + "/data/bills.dat";
     private static ObjectOutputStream billsOutput;
 
     private static List<Bill> bills;
