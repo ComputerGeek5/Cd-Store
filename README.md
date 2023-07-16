@@ -1,6 +1,6 @@
 # CD-Store
 
-CD-Store is a school project that aims to develop a software application for managing a CD store business. The main features of the software include inventory management, sales tracking, user roles and permissions, supplier management, and employee administration.
+CD-Store is a school project that aims to develop a desktop application using JavaFX for managing a CD store business. The main features of the software include inventory management, sales tracking, user roles and permissions, supplier management, and employee administration.
 
 ## Features
 
